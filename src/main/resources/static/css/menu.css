@@ -1,0 +1,175 @@
+/* section2 區域 Menu */
+
+#sec2 {
+    padding-top: 70px;
+}
+
+#sec2 .menu-card img {
+    width: 50px;
+    height: 50px;
+}
+
+#sec2 .menu-card h2 {
+    font-size: 28px;
+}
+
+.menu-card a {
+    font-size: 28px;
+}
+
+.list-group-item:hover {
+    color: #fff;
+    background-color: var(--c-sub3-05);
+    border-color: var(--c-sub3-05);
+}
+
+.list-group-item.active {
+    color: #fff;
+    background-color: var(--c-sub3-08);
+    border-color: var(--c-sub3-08);
+}
+
+.card {
+    min-width: 200px;
+    width: 100%;
+}
+
+.meal-card img {
+    padding: 20px;
+    margin: auto;
+}
+
+#sec2 img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+#sec2 h2 {
+    font-size: 30px;
+}
+
+#sec2 p {
+    text-indent: 0;
+    font-size: 24px;
+}
+
+#sec2 .btn {
+    border-radius: 15px;
+}
+
+
+.menu-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.meal-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.meal-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 767px) {
+    .meal-card:hover {
+        transform: scale(1.1);
+
+    }
+}
+
+.meal-card,
+.menu-card,
+.list-group,
+.meal-card img {
+    border-radius: 25px;
+}
+
+@media (min-width: 767px) {
+
+    .col-md-9,
+    .col-md-3 {
+        padding-left: 25px;
+        font-size: 20px;
+    }
+
+    #sec2 .menu-card img {
+        width: 30px;
+        height: 30px;
+    }
+
+    #meal h2,
+    #sec2 h3 {
+        font-size: 30px;
+    }
+
+    #meal p {
+        font-size: 24px;
+    }
+
+}
+
+
+/* 頁面按鈕 */
+.simple-pagination ul {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 50px;
+    display: flex;
+}
+
+.page-link {
+    color: var(--c-base-10);
+    background-color: #fff;
+}
+
+.simple-pagination .current {
+    color: #fff;
+    background-color: var(--c-base-10);
+    border: 1px solid #dee2e6;
+    text-align: center;
+    padding: 6px 12px;
+    margin-top: 0px;
+    position: relative;
+    display: block;
+}
+
+.simple-pagination li a {
+    font-weight: bold;
+}
+
+.prev {
+    border-radius: 15px 0 0 15px;
+}
+
+.next {
+    border-radius: 0 15px 15px 0;
+}
+
+.pagination {
+    width: 100%;
+    justify-content: center;
+}
+
+@media(max-width: 767px) {
+    .simple-pagination li a {
+        font-size: 18px;
+        padding: 0px 6px;
+    }
+
+    .simple-pagination .current {
+        font-size: 18px;
+        padding: 0px 6px;
+    }
+
+}
+
+#pagination-container {
+    height: 55px;
+}
+
+#pagination-container ul {
+    padding: 0px;
+    align-content: center;
+}

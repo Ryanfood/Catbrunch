@@ -1,0 +1,245 @@
+/* section2 區域 Menu */
+#sec2 {
+    font-size: 34px;
+    padding: 100px 0px;
+}
+
+.list-group-item,
+.change-quantity {
+    font-size: 24px;
+    outline: 1px solid rgba(0, 0, 0, .125);
+
+}
+
+#sec2 .meal-type .list-group-item img {
+    width: 30px;
+    height: 30px;
+}
+
+.meal-type,
+.list-group-item {
+    border-radius: 25px;
+}
+
+#meal-container h2 {
+    font-size: 30px;
+}
+
+#meal-container p {
+    text-indent: 0;
+    font-size: 24px;
+}
+
+.meal-card {
+    border-radius: 25px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.meal-card button {
+    border-radius: 25px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    width: 75%;
+    margin: 0px auto;
+}
+
+.list-group-item:hover {
+    color: #fff;
+    background-color: var(--c-sub3-05);
+    border-color: var(--c-sub3-05);
+}
+
+.list-group-item.active {
+    color: #fff;
+    background-color: var(--c-sub3-08);
+    border-color: var(--c-sub3-08);
+}
+
+.meal-card img {
+    padding: 20px;
+    margin: auto;
+}
+
+@media (min-width: 800px) {
+
+    #sec2 .meal-type .list-group-item img {
+        width: 50px;
+        height: 50px;
+    }
+
+}
+
+/* 頁面按鈕 */
+.simple-pagination ul {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 50px;
+    display: flex;
+}
+
+.page-link {
+    color: var(--c-base-10);
+    background-color: #fff;
+}
+
+.simple-pagination .current {
+    color: #fff;
+    background-color: var(--c-base-10);
+    border: 1px solid #dee2e6;
+    text-align: center;
+    padding: 6px 12px;
+    margin-top: 0px;
+    position: relative;
+    display: block;
+}
+
+.simple-pagination li a {
+    font-weight: bold;
+}
+
+.prev {
+    border-radius: 15px 0 0 15px;
+}
+
+.next {
+    border-radius: 0 15px 15px 0;
+}
+
+.pagination {
+    width: 100%;
+    justify-content: center;
+}
+
+
+.form-select {
+    font-size: 2rem;
+    margin: 20px 30px;
+    border-radius: 15px;
+    min-width: 250px;
+}
+
+
+@media(max-width: 767px) {
+    .simple-pagination li a {
+        font-size: 18px;
+        padding: 0px 6px;
+    }
+
+    .simple-pagination .current {
+        font-size: 18px;
+        padding: 0px 6px;
+    }
+
+}
+
+#pagination-container {
+    height: 55px;
+}
+
+#pagination-container ul {
+    padding: 0px;
+    align-content: center;
+}
+
+/* 頁面按鈕結束 */
+
+
+
+#sec2 .input-group {
+    min-width: 100px;
+    max-width: 150px;
+    white-space: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* 數量input */
+#sec2 .quantity-input {
+    background-color: #fff;
+    margin-top: 5px;
+    max-height: 46px;
+    border-radius: 3px;
+    font-size: 30px;
+}
+
+.table {
+    max-width: 95%;
+    margin: auto;
+}
+
+#total-amount {
+    margin: 20px 0px;
+    text-align: center;
+}
+
+.submitButton {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-outline-success {
+    font-size: 24px;
+
+    border: 2px solid rgb(25, 135, 84);
+    border-radius: 15px;
+
+}
+
+.remove-item {
+    font-size: 24px;
+    border: 2px solid rgb(220, 53, 69);
+    border-radius: 15px;
+}
+
+/* 寬度低於600 購物車分兩欄 */
+@media (max-width: 600px) {
+
+    .cart-table td,
+    .cart-table th {
+        display: block;
+        width: 100%;
+    }
+
+    .cart-table td:nth-child(2),
+    .cart-table th:nth-child(2) {
+        margin-top: 10px;
+        /* 調整第二欄位的上邊距 */
+    }
+
+    .cart-table .input-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cart-table .input-group-prepend,
+    .cart-table .input-group-append {
+        flex-basis: 20%;
+    }
+
+    .cart-table .input-group input {
+        flex-grow: 1;
+        margin: 0 10px;
+    }
+
+    #sec2 .quantity-input {
+        margin: 0;
+        margin-top: 6px;
+        font-size: 22px;
+        height: 39.6px;
+
+    }
+
+
+    tr {
+        border: 3px solid #000;
+    }
+
+    td {
+        border: none;
+        margin: 0;
+    }
+}

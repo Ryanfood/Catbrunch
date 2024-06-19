@@ -1,0 +1,122 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true"%>
+<!-- Tomcat 10.x JSTL -->
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
+<!-- Spring Form 表單標籤 -->
+<%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form"%>
+
+<!-- 統計資料 -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+        	GenderChart();
+      		AgeChart();
+        }
+              
+        function GenderChart() {
+            var maleCount = 0;
+            var femaleCount = 0;
+
+            <c:forEach var="member" items="${ memberList }">
+                <c:choose>
+                    <c:when test="${ member.gender == '男生'}">
+                        maleCount++;
+                    </c:when>
+                    <c:when test="${ member.gender == '女生'}">
+                        femaleCount++;
+                    </c:when>
+                </c:choose>
+            </c:forEach>
+
+            var data = google.visualization.arrayToDataTable([
+                ['Gender', 'Count'],
+                ['男生', maleCount],
+                ['女生', femaleCount]
+            ]);
+
+            var options = {
+           		title: '性別分布',
+           	    is3D: true,
+           	    backgroundColor: '#FFFAE6',
+           	 	fontSize: 28,
+           	 	fontName: 'cat',
+           		 slices: {
+	                 0: { color: 'A5D8F3' }, // 男生的部分顏色設定為藍色
+	                 1: { color: 'FDC7D7' }  // 女生的部分顏色設定為粉色
+             	 }
+            };
+         	// PieChart, BarChart, ColumnChart, LineChart
+            var chart = new google.visualization.PieChart(document.getElementById('genderchart'));
+            chart.draw(data, options);
+        }
+        
+        function AgeChart() {
+            var ageGroup20Below = 0;
+            var ageGroup20To30 = 0;
+            var ageGroup30To40 = 0;
+            var ageGroup40To50 = 0;
+            var ageGroup50Above = 0;
+
+            <c:forEach var="member" items="${ memberList }">
+                var birthday = new Date('${ member.birthday }'); // 生日日期
+                var today = new Date(); // 現在日期
+
+                // 計算年齡
+                var age = today.getFullYear() - birthday.getFullYear();
+                var monthDiff = today.getMonth() - birthday.getMonth();
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+                    age--; // 如果還沒過生日就算是少一歲
+                }
+
+                // 根據年齡分組統計人數
+                if (age < 20) {
+                    ageGroup20Below++;
+                } else if (age >= 20 && age < 30) {
+                    ageGroup20To30++;
+                } else if (age >= 30 && age < 40) {
+                    ageGroup30To40++;
+                } else if (age >= 40 && age < 50) {
+                    ageGroup40To50++;
+                } else {
+                    ageGroup50Above++;
+                }
+            </c:forEach>
+
+            var ageData = google.visualization.arrayToDataTable([
+                ['年齡', '人數', { role: 'style' }],
+                ['20歲以下', ageGroup20Below, 'color: #75D5FD'], // 設定第一個長條的顏色
+                ['20-30歲', ageGroup20To30, 'color: #FF9DE6'], // 設定第二個長條的顏色
+                ['30-40歲', ageGroup30To40, 'color: #FF9472'], // 設定第三個長條的顏色
+                ['40-50歲', ageGroup40To50, 'color: #7BF1A8'], // 設定第四個長條的顏色
+                ['50歲以上', ageGroup50Above, 'color: #7D7AF4'] // 設定第五個長條的顏色
+            ]);
+
+            var ageOptions = {
+                title: '年齡分布',
+           	    is3D: true,
+           	    backgroundColor: '#FFFAE6',
+           	 	fontSize: 28,
+           	 	fontName: 'cat',
+           	 	legend: { position: 'none' } // 移除圖表旁邊的小藍色方塊
+            };
+            
+         	// PieChart, BarChart, ColumnChart, LineChart
+            var Chart = new google.visualization.ColumnChart(document.getElementById('agechart'));
+            Chart.draw(ageData, ageOptions);
+        }
+        
+        
+    </script>
+
+	<h2 class="mb-4">統計圖表</h2>
+	<div class="col-12 col-md-6">
+		<div id="genderchart" style="width: 700px; height: 500px;"></div>
+	</div>
+	<div class="col-12 col-md-6">
+        <div id="agechart" style="width: 700px; height: 500px;"></div>
+    </div>

@@ -1,0 +1,175 @@
+/* section1 區域 大圖片影片 */
+
+#sec1 video {
+    height: 180px;
+}
+
+@media (min-width: 470px) {
+    #sec1 video {
+        height: 230px;
+    }
+}
+
+@media (min-width: 576px) {
+    #sec1 video {
+        height: 280px;
+    }
+}
+
+@media (min-width: 768px) {
+    #sec1 video {
+        height: 370px;
+    }
+}
+
+@media (min-width: 992px) {
+    #sec1 video {
+        height: 505px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #sec1 video {
+        height: 565px;
+    }
+}
+
+@media (min-width: 1400px) {
+    #sec1 video {
+        height: 660px;
+    }
+}
+
+/* section2 區域 會員 */
+/* 登入 */
+.login {
+    min-width: 300px;
+    max-width: 370px;
+    padding: 30px 20px;
+    margin: 0px 10px;
+    background-color: var(--c-base-07);
+    border-radius: 25px;
+}
+
+#sec2 .login h2,
+#sec2 .register h2 {
+    text-align: center;
+    font-size: 40px;
+}
+
+#sec2 .login p,
+#sec2 .register p {
+    text-align: center;
+    text-indent: 0;
+    font-size: 1.2rem;
+}
+
+.login label,
+.register label {
+    font-size: 24px;
+}
+
+.form-control {
+    font-size: 24px;
+    border-radius: 25px;
+}
+
+.password-eye {
+    position: relative;
+}
+
+.password-eye-append {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+#sec2 .login button,
+#sec2 .register button {
+    width: 60%;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 25px;
+    background-color: rgb(0, 130, 240);
+}
+
+#sec2 .login button:hover,
+#sec2 .register button:hover {
+    background-color: rgb(10, 90, 180);
+}
+
+/* 消除input左邊框 */
+.form-control {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+    max-width: 330px;
+}
+
+.input-group-text {
+    font-size: 26px;
+}
+
+.icon {
+    background-color: #fff;
+    font-size: 15px;
+    border-right: none;
+    border-radius: 25px;
+}
+
+.input-group {
+    flex-wrap: nowrap;
+}
+
+/* 圖片驗證 */
+/* 圖片 */
+#mycanvas {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* 文字 */
+#linkbt {
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-left: 15px;
+}
+
+/* input */
+#myvad {
+    border-radius: 25px;
+}
+
+
+/* 加入會員 */
+.register {
+    min-width: 300px;
+    max-width: 650px;
+    padding: 30px 20px;
+    margin: 0px 10px;
+    background-color: var(--c-base-07);
+    border-radius: 25px;
+}
+
+.col-sm-4 label {
+    width: 100px;
+    height: 1px;
+    text-align: justify;
+    margin-top: 5px;
+    margin-left: 50px;
+}
+
+
+.col-sm-4 label::after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+}
+
+@media(max-width: 576px) {
+    .col-sm-4 label {
+        margin-left: 10px;
+    }
+}

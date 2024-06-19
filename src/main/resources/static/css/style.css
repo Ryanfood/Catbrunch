@@ -1,0 +1,354 @@
+/* 字型 NaikaiFont 最適合貓貓字體*/
+@font-face {
+    font-family: "cat";
+    src: url(/fonts/NaikaiFont-Regular.ttf) format(truetype);
+}
+
+/* 字型 jf 粉圓字體*/
+@font-face {
+    font-family: "jf";
+    src: url(/fonts/jf-openhuninn-2.0.ttf) format(truetype);
+}
+
+/* 字型 Chen 手寫字體*/
+@font-face {
+    font-family: "hand";
+    src: url(/fonts/ChenYuluoyan-Thin.ttf) format(truetype);
+}
+
+:root {
+    --c-base-10: rgba(130, 180, 240, 1.0);
+    --c-base-07: rgba(130, 180, 240, 0.7);
+    --c-sub1-10: rgba(255, 250, 230, 1.0);
+    --c-sub2-10: rgba(255, 230, 200, 1.0);
+    --c-sub3-10: rgba(255, 150, 50, 1.0);
+    --c-sub3-08: rgba(255, 150, 50, 0.8);
+    --c-sub3-05: rgba(255, 150, 50, 0.5);
+    --c-sub4-10: rgba(255, 200, 220, 1.0);
+
+    --f-family: "cat", "jf", sans-serif;
+    --f-hand: "hand", "jf", sans-serif;
+}
+
+.hello {
+    position: fixed;
+    top: 50px;
+    /* 距離底部的距離 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    /* 設置 z-index 為較大的數值，確保它在最上層 */
+    padding-top: 10px;
+}
+
+/* Sweet Alert2 */
+.swal2-popup,
+.swal2-actions .swal2-confirm,
+.swal2-actions .swal2-cancel {
+    border-radius: 15px;
+
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--c-sub1-10);
+    color: #333;
+    font-family: var(--f-family);
+    font-size: 26px;
+    position: relative;
+}
+
+/* header 區域 */
+header {
+    padding-bottom: 130px;
+}
+
+h1,
+.navbar-light .navbar-nav .nav-link {
+    color: var(--c-sub3-10);
+}
+
+.navbar {
+    background: var(--c-sub2-10);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    font-size: calc(16px + 0.5vw);
+}
+
+.nav-link img {
+    width: 30px;
+    height: 30px;
+}
+
+.nav-link:hover img {
+    content: url('/img/pawprint2.png');
+}
+
+.nav-link.active img {
+    content: url('/img/pawprint2.png');
+}
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+    color: var(--c-base-10);
+}
+
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .show>.nav-link {
+    color: var(--c-base-10);
+    /* border-radius: 25px; */
+    /* border-color: var(--c-sub3-10); */
+}
+
+.navbar-light .navbar-toggler {
+    color: var(--c-sub3-10);
+}
+
+.Logo {
+    margin: -10px;
+    padding-left: 5px;
+}
+
+@media (max-width: 767px) {
+    #h1 {
+        font-size: 2rem;
+        /* 漢堡圖標的字體大小 */
+        text-align: center;
+        /* 標題水平置中 */
+    }
+
+    #nav-link {
+        font-size: 1.5rem;
+        /* li 元素中 a 標籤的字體大小 */
+        letter-spacing: 1rem;
+        /* text-align: center; */
+    }
+}
+
+/* section1 區域 大圖片輪播 */
+#sec1 img {
+    border-radius: 25px;
+}
+
+video::-webkit-media-controls {
+    display: none !important;
+}
+
+/* section1 區域 大圖片影片 */
+#sec1 video {
+    height: 200px;
+}
+
+@media (min-width: 576px) {
+    #sec1 video {
+        height: 300px;
+    }
+}
+
+@media (min-width: 768px) {
+    #sec1 video {
+        height: 390px;
+    }
+}
+
+@media (min-width: 992px) {
+    #sec1 video {
+        height: 525px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #sec1 video {
+        height: 615px;
+    }
+}
+
+@media (min-width: 1400px) {
+    #sec1 video {
+        height: 730px;
+    }
+}
+
+/* section2 區域 About Me */
+#sec2 {
+    min-height: 350px;
+}
+
+@media (min-width: 768px) {
+    #sec2 {
+        min-height: 400px;
+    }
+}
+
+@media (min-width: 992px) {
+    #sec2 {
+        min-height: 425px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #sec2 {
+        min-height: 450px;
+    }
+}
+
+@media (min-width: 1400px) {
+    #sec2 {
+        min-height: 475px;
+    }
+}
+
+#sec2 .about,
+#sec2 img {
+    width: calc(280px + 10vw);
+    height: calc(280px + 10vw);
+    border-radius: 25px;
+    max-height: 475px;
+    max-width: 475px;
+}
+
+.card-img {
+    opacity: .5;
+}
+
+#sec2 h2 {
+    font-size: clamp(30px, calc(16px + 1vw), 42px);
+    font-weight: 600;
+}
+
+#sec2 p {
+    text-indent: 2em;
+    font-size: clamp(16px, calc(16px + 1vw), 32px);
+}
+
+/* About Me 卡片效果 */
+
+.aboutcard,
+.aboutcard2 {
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform .6s ease-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.cardbox {
+    position: relative;
+}
+
+.cardbox:hover .aboutcard {
+    transform: rotatey(180deg);
+}
+
+.aboutcard2 {
+    transform: rotatey(-180deg);
+}
+
+.cardbox:hover .aboutcard2 {
+    transform: rotatey(0deg);
+}
+
+.aboutcard {
+    transform: rotatey(0deg);
+}
+
+/* section3 區域 News活動 */
+#sec3 .card,
+#sec3 img,
+#sec3 .btn,
+.newsbg {
+    border-radius: 25px;
+}
+
+#sec3 {
+    margin: 30px 0px;
+}
+
+.newstitle {
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+#sec3 {
+    min-height: 475px;
+}
+
+.newsbg {
+    background-color: var(--c-base-10);
+    padding: 10px;
+}
+
+/* footer 區域 */
+footer {
+    min-height: 200px;
+    background-color: var(--c-sub2-10);
+    padding-top: 20px;
+    font-weight: bold;
+}
+
+footer h3 {
+    color: var(--c-sub3-10);
+    font-size: 26px;
+    letter-spacing: 1rem;
+}
+
+footer a {
+    color: var(--c-sub3-10);
+    font-size: 26px;
+    letter-spacing: 0.2rem;
+}
+
+footer p {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.flex-column {
+    padding: 15px 0px;
+}
+
+
+footer a:hover {
+    color: var(--c-base-10);
+}
+
+footer .active {
+    color: var(--c-base-10);
+}
+
+footer img {
+    /* min-width: 100px;
+  min-height: 100px; */
+    max-width: 100px;
+    max-height: 100px;
+    padding: 0 0 10px 10px;
+}
+
+footer div {
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    footer h3 {
+        font-size: 28px;
+    }
+
+    footer a {
+        font-size: 28px;
+    }
+
+    footer p {
+        font-size: 22px;
+    }
+
+}

@@ -1,0 +1,250 @@
+#sec1 {
+    min-height: 800px;
+}
+
+#searchInput {
+    min-width: 250px;
+    max-width: 300px;
+    font-size: 20px;
+}
+
+th img {
+    cursor: pointer;
+    width: 20px;
+    transition: transform 0.2s;
+}
+
+/* 密碼欄位寬度 */
+.ellipsis {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* tooltip寬度 */
+.tooltip-inner {
+    max-width: 600px;
+    white-space: nowrap;
+}
+
+/* 表格 */
+table {
+    width: 100%;
+    /* display: block; */
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 1.4rem;
+}
+
+table .btn {
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+
+.password-eye {
+    position: relative;
+}
+
+.password-eye-append {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* 修改表單 */
+.modal-content .btn {
+    border-radius: 10px;
+    font-size: 1.5rem;
+}
+
+.modal-header {
+	background-color: var(--c-sub2-10);
+}
+
+.modal-body {
+	background-color: var(--c-sub1-10);
+}
+
+
+
+
+/* 修改表單排版 */
+
+@media (min-width: 760px) {
+    .form-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-group label {
+        white-space: nowrap;
+    }
+
+    .form-group input {
+        min-width: 300px;
+        font-size: 1.5rem;
+        flex: 1;
+    }
+}
+
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+        font-size: 24px;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tr {
+        border-bottom: 2px solid #690461;
+    }
+
+    td {
+        border-bottom: 1px solid #d7dafa !important;
+        position: relative;
+        padding-left: 35% !important;
+        text-align: left;
+    }
+
+    /* 密碼欄位寬度 */
+    .ellipsis {
+        max-width: 997px;
+    }
+
+    /* tooltip寬度 */
+    .tooltip-inner {
+        max-width: 300px;
+        white-space: wrap;
+    }
+
+    td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        max-width: 80px;
+    }
+
+    td:nth-of-type(1):before {
+        content: "會員ID";
+        color: #0e9893;
+    }
+
+    td:nth-of-type(2):before {
+        content: "帳號";
+        color: #0e9893;
+    }
+
+    td:nth-of-type(3):before {
+        content: "密碼";
+        color: #0e9893;
+    }
+
+    td:nth-of-type(4):before {
+        content: "姓名";
+        color: #0e9893;
+    }
+
+    td:nth-of-type(5):before {
+        content: "性別";
+        color: #0e9893;
+    }
+
+    td:nth-of-type(6):before {
+        content: "生日";
+        color: #0e9893;
+    }
+
+    td:nth-of-type(7):before {
+        content: "信箱";
+        color: #0e9893;
+    }
+
+    td:nth-of-type(8):before {
+        content: "手機號碼";
+        color: #0e9893;
+    }
+
+    td:nth-of-type(9):before {
+        content: "操作";
+        color: #0e9893;
+    }
+}
+
+
+/* 頁面按鈕 */
+.simple-pagination ul {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 50px;
+    display: flex;
+}
+
+.page-link {
+    color: var(--c-base-10);
+    background-color: #fff;
+}
+
+.simple-pagination .current {
+    color: #fff;
+    background-color: var(--c-base-10);
+    border: 1px solid #dee2e6;
+    text-align: center;
+    padding: 6px 12px;
+    margin-top: 0px;
+    position: relative;
+    display: block;
+}
+
+.simple-pagination li a {
+    font-weight: bold;
+}
+
+.prev {
+    border-radius: 15px 0 0 15px;
+}
+
+.next {
+    border-radius: 0 15px 15px 0;
+}
+
+.pagination {
+    width: 100%;
+    justify-content: center;
+}
+
+@media(max-width: 576px) {
+    .simple-pagination li a {
+        font-size: 18px;
+        padding: 0px 6px;
+    }
+
+    .simple-pagination .current {
+        font-size: 18px;
+        padding: 0px 6px;
+    }
+
+}
+
+#pagination-container {
+    height: 55px;
+}
+
+#pagination-container ul {
+    padding: 0px;
+}

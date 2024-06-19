@@ -1,0 +1,90 @@
+/* #sec2 *{
+    border: 1px solid red;
+} */
+
+#sec2 h2 {
+    font-size: calc(22px + 1.5vw);
+}
+
+
+#sec2 p {
+    text-indent: 0em;
+}
+
+
+.card {
+    border-radius: 25px;
+}
+
+#sec2 .newstitle h2 {
+    font-size: calc(24px + 1.5vw);
+}
+
+#sec2 img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    margin: 20px;
+}
+
+/* 頁面按鈕 */
+.simple-pagination ul {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 50px;
+    display: flex;
+}
+
+.page-link {
+    color: var(--c-base-10);
+    background-color: #fff;
+}
+
+.simple-pagination .current {
+    color: #fff;
+    background-color: var(--c-base-10);
+    border: 1px solid #dee2e6;
+    text-align: center;
+    padding: 6px 12px;
+    margin-top: 0px;
+    position: relative;
+    display: block;
+}
+
+.simple-pagination li a {
+    font-weight: bold;
+}
+
+.prev {
+    border-radius: 15px 0 0 15px;
+}
+
+.next {
+    border-radius: 0 15px 15px 0;
+}
+
+.pagination {
+    width: 100%;
+    justify-content: center;
+}
+
+@media(max-width: 576px) {
+    .simple-pagination li a {
+        font-size: 18px;
+        padding: 0px 6px;
+    }
+
+    .simple-pagination .current {
+        font-size: 18px;
+        padding: 0px 6px;
+    }
+
+}
+
+#pagination-container {
+    height: 55px;
+}
+
+#pagination-container ul {
+    padding: 0px;
+}

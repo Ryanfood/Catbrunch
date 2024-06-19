@@ -1,0 +1,33 @@
+/* section2 區域 地圖 */
+#sec2 p {
+    font-size: 1.5rem;
+}
+
+h2 {
+    display: block;
+    max-width: 100%;
+    margin: 30px auto;
+    padding: 10px 0px;
+    border: 5px solid var(--c-sub3-10);
+    border-radius: 25px;
+    width: 400px;
+}
+
+iframe {
+    display: flex;
+    max-width: 100%;
+    margin: 30px auto;
+    padding: 10px;
+    border-radius: 10px;
+    border: 5px solid var(--c-sub3-10);
+    border-radius: 25px;
+    width: 400px;
+    height: 300px;
+}
+
+@media (min-width: 768px) {
+    iframe {
+        width: 600px;
+        height: 400px;
+    }
+}
