@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.List;
 
@@ -32,33 +33,37 @@ public class MemberService {
 	// 新增 member
 	public int createMember(Member member) throws Exception {
 		
-		// 1.將 password 利用 SHA-256 加密
-		String password = member.getPassword();
-		// 隨機生成一個鹽(Salt)
-		byte[] salt = new byte[16];
-		SecureRandom secureRandom = new SecureRandom();
-		
-		// 2. 填充隨機值，取得 鹽(Hex)
-		secureRandom.nextBytes(salt);
-		
-		// 3.取得 加鹽後的哈希密碼
-		KeyUtil.bytesToHex(salt);
-		
-		// 獲取 SHA-256 消息摘要物件來幫助我們生成密碼的哈希
-		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-		// 加鹽
-		messageDigest.update(salt);
-		// 將密碼轉換為 byte[] 然後生成哈希
-		byte[] hashedBytes = messageDigest.digest(password.getBytes());
-		// 將 byte[] 轉 Hex
-		String hashedHexString = KeyUtil.bytesToHex(hashedBytes);
-		System.out.printf("原始密碼: %s%n", password);
-		System.out.printf("加鹽後的哈希密碼: %s%n", hashedHexString);
-		
-		// 4.存入 DB
-		// 設定加密後的密碼及鹽巴
-		member.setPassword(hashedHexString);
-		member.setSalt(KeyUtil.bytesToHex(salt));
+		if(member != null) {
+			// 1.將 password 利用 SHA-256 加密
+			String password = member.getPassword();
+			// 隨機生成一個鹽(Salt)
+			byte[] salt = new byte[16];
+			SecureRandom secureRandom = new SecureRandom();
+			
+			// 2. 填充隨機值，取得 鹽(Hex)
+			secureRandom.nextBytes(salt);
+			
+			// 3.取得 加鹽後的哈希密碼
+			KeyUtil.bytesToHex(salt);
+			
+			// 獲取 SHA-256 消息摘要物件來幫助我們生成密碼的哈希
+			MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+			// 加鹽
+			messageDigest.update(salt);
+			// 將密碼轉換為 byte[] 然後生成哈希
+			byte[] hashedBytes = messageDigest.digest(password.getBytes());
+			// 將 byte[] 轉 Hex
+			String hashedHexString = KeyUtil.bytesToHex(hashedBytes);
+			System.out.printf("原始密碼: %s%n", password);
+			System.out.printf("加鹽後的哈希密碼: %s%n", hashedHexString);
+			
+			// 4.存入 DB
+			// 設定加密後的密碼及鹽巴
+			member.setPassword(hashedHexString);
+			member.setSalt(KeyUtil.bytesToHex(salt));
+		} else {
+    		System.out.println("帳號不存在");
+    	}
 		
 		return memberDao.createMember(member);
 	}
@@ -76,7 +81,45 @@ public class MemberService {
 		return memberDao.deleteMember(memberId);
 	}
 	
-	// 登入
+	public Member login(String account, String password) throws Exception {
+	    // 從資料庫中根據帳號查詢相應的會員
+	    Member member = memberDao.findMemberByAccount(account);
+
+	    // 如果找不到會員
+	    if (member == null) {
+	        System.out.println("查無此帳號");
+	        return null; // 返回 null 表示找不到帳號
+	    }
+
+	    // 如果找到了會員，檢查密碼是否正確
+	    if (!isPasswordCorrect(member, password)) {
+	        System.out.println("密碼錯誤");
+	        return null; // 返回 null 表示密碼錯誤
+	    }
+
+	    // 密碼正確，返回會員資料
+	    return member;
+	}
+
+	// 檢查密碼是否正確的方法
+	private boolean isPasswordCorrect(Member member, String password) throws NoSuchAlgorithmException {
+	    String hash = member.getPassword();
+	    String salt = member.getSalt();
+	    String inputHashedHexString = hashPassword(password, salt);
+	    return inputHashedHexString.equals(hash);
+	}
+
+	// 生成密碼的雜湊值的方法
+	private String hashPassword(String password, String salt) throws NoSuchAlgorithmException {
+	    MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+	    messageDigest.update(KeyUtil.hexStringToByteArray(salt));
+	    byte[] inputHashedBytes = messageDigest.digest(password.getBytes());
+	    return KeyUtil.bytesToHex(inputHashedBytes);
+	}
+	
+	
+	/*
+	// 原本的登入
 	public Member login(String account, String password) throws Exception {
 		// 從資料庫中根據帳號查詢相應的會員
 		Member member = memberDao.findMemberByAccount(account);
@@ -84,7 +127,8 @@ public class MemberService {
 		// 如果沒有找到會員，印出訊息並拋出例外
 		if (member == null) {
 		    System.out.println("查無此帳號");
-		    throw new Exception("Account not found");
+		    //throw new Exception("Account not found");
+		    return null;
 		}
 
 		// 從資料庫中獲取會員的密碼雜湊值和鹽值
@@ -117,8 +161,8 @@ public class MemberService {
 
 		// 調用 memberDao 的 login 方法，傳遞帳號和生成的雜湊十六進位字串，進行登入操作並返回結果
 		return memberDao.login(account, inputHashedHexString);
-
 	}
+	*/
 
 	// 驗證 Account 是否存在
 	public boolean checkAccount(String account) {

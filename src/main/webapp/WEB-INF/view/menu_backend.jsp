@@ -22,6 +22,7 @@
 	<!-- SimplePagination -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"></script>
 	<!-- js -->
+	<script src="/js/script.js"></script>
 	<script src="/js/menu_backend.js"></script>
 	<!-- sweetalert2 -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/dist/sweetalert2.min.css" rel="stylesheet">
@@ -44,6 +45,9 @@
 							<img src="/img/Logo/Logo.gif" class="Logo" height="90" alt="">
 							<h1 class="m-0 ms-3" id="h1">貓貓後臺</h1>
 						</a>
+						
+						 <p class="hello">歡迎回來，${ member.name }</p>
+						
 
 						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 							data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false"
@@ -69,6 +73,10 @@
 									<a class="nav-link" id="nav-link" href="/member_backend">
 									<img class="me-2" src="/img/paw-print.png" alt="">會員</a>
 								</li>
+								<li class="nav-item">
+                                    <a class="nav-link logout" id="nav-link" type="button">
+                                    <img class="me-2" src="/img/paw-print.png" alt="">登出</a>
+                                </li>
 							</ul>
 						</nav>
 

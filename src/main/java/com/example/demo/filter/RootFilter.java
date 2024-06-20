@@ -26,14 +26,11 @@ public class RootFilter extends HttpFilter{
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
-		System.out.println("UTF8EncodeFilter 編碼");
-		
+
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginStatus") == null) {
 			response.sendRedirect("/index");
 		}
-		
 		
 		//response.getWriter().print("UTF8Encode!");
 		chain.doFilter(request, response); // 往下繼續執行(放行)

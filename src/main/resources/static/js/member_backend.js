@@ -282,41 +282,5 @@ $(document).ready(function () {
 
     // 初始化所有帶有 data-bs-toggle="tooltip" 的元素
     $('[data-bs-toggle="tooltip"]').tooltip();
-
     
 });
-
-/*
-	// ready 外面
-	// 修改會員
-  	var updateMember = async () => {
-	    var memberId = $('#memberId').val(); // 會員ID
-
-		 Swal.fire({
-			  position: "center",
-			  icon: "success",
-			  title: `${memberId}號會員修改成功`,
-			  showConfirmButton: false,
-			  timer: 1300
-		 });
-		 
-	    try {
-	        var response = await fetch('http://localhost:8080/member_backend/' + memberId, {
-	            method: "PUT",
-	            body: new FormData($('#updateMemberForm')[0])
-	        });
-	        
-	        const result = await response.text();
-
-			// 跳轉到 http://localhost:8080/member_backend
-	        if (result) {
-	            window.location.href = 'http://localhost:8080/member_backend';
-	        }
-	        
-	    } catch (error) {
-	        console.error('發生錯誤', error);
-	    }
-	}
-
-*/
-

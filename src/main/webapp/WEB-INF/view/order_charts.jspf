@@ -10,113 +10,140 @@
 <!-- 統計資料 -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.charts.load('current', {'packages': ['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-        	GenderChart();
-      		AgeChart();
-        }
-              
-        function GenderChart() {
-            var maleCount = 0;
-            var femaleCount = 0;
-
-            <c:forEach var="member" items="${ memberList }">
-                <c:choose>
-                    <c:when test="${ member.gender == '男生'}">
-                        maleCount++;
-                    </c:when>
-                    <c:when test="${ member.gender == '女生'}">
-                        femaleCount++;
-                    </c:when>
-                </c:choose>
-            </c:forEach>
-
-            var data = google.visualization.arrayToDataTable([
-                ['Gender', 'Count'],
-                ['男生', maleCount],
-                ['女生', femaleCount]
-            ]);
-
-            var options = {
-           		title: '性別分布',
-           	    is3D: true,
-           	    backgroundColor: '#FFFAE6',
-           	 	fontSize: 28,
-           	 	fontName: 'cat',
-           		 slices: {
-	                 0: { color: 'A5D8F3' }, // 男生的部分顏色設定為藍色
-	                 1: { color: 'FDC7D7' }  // 女生的部分顏色設定為粉色
-             	 }
-            };
-         	// PieChart, BarChart, ColumnChart, LineChart
-            var chart = new google.visualization.PieChart(document.getElementById('genderchart'));
-            chart.draw(data, options);
-        }
-        
-        function AgeChart() {
-            var ageGroup20Below = 0;
-            var ageGroup20To30 = 0;
-            var ageGroup30To40 = 0;
-            var ageGroup40To50 = 0;
-            var ageGroup50Above = 0;
-
-            <c:forEach var="member" items="${ memberList }">
-                var birthday = new Date('${ member.birthday }'); // 生日日期
-                var today = new Date(); // 現在日期
-
-                // 計算年齡
-                var age = today.getFullYear() - birthday.getFullYear();
-                var monthDiff = today.getMonth() - birthday.getMonth();
-                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
-                    age--; // 如果還沒過生日就算是少一歲
-                }
-
-                // 根據年齡分組統計人數
-                if (age < 20) {
-                    ageGroup20Below++;
-                } else if (age >= 20 && age < 30) {
-                    ageGroup20To30++;
-                } else if (age >= 30 && age < 40) {
-                    ageGroup30To40++;
-                } else if (age >= 40 && age < 50) {
-                    ageGroup40To50++;
-                } else {
-                    ageGroup50Above++;
-                }
-            </c:forEach>
-
-            var ageData = google.visualization.arrayToDataTable([
-                ['年齡', '人數', { role: 'style' }],
-                ['20歲以下', ageGroup20Below, 'color: #75D5FD'], // 設定第一個長條的顏色
-                ['20-30歲', ageGroup20To30, 'color: #FF9DE6'], // 設定第二個長條的顏色
-                ['30-40歲', ageGroup30To40, 'color: #FF9472'], // 設定第三個長條的顏色
-                ['40-50歲', ageGroup40To50, 'color: #7BF1A8'], // 設定第四個長條的顏色
-                ['50歲以上', ageGroup50Above, 'color: #7D7AF4'] // 設定第五個長條的顏色
-            ]);
-
-            var ageOptions = {
-                title: '年齡分布',
-           	    is3D: true,
-           	    backgroundColor: '#FFFAE6',
-           	 	fontSize: 28,
-           	 	fontName: 'cat',
-           	 	legend: { position: 'none' } // 移除圖表旁邊的小藍色方塊
-            };
-            
-         	// PieChart, BarChart, ColumnChart, LineChart
-            var Chart = new google.visualization.ColumnChart(document.getElementById('agechart'));
-            Chart.draw(ageData, ageOptions);
-        }
-        
+	    google.charts.load('current', {'packages':['corechart', 'bar']});
+	    google.charts.setOnLoadCallback(drawCharts);
+	
+	    function drawCharts() {
+	        // 從 JSP 頁面獲取數據並轉換為 JavaScript 數組
+	        var orders = [
+	            <c:forEach var="order" items="${orderList}">
+	                {
+	                    name: '${order.orderName}',
+	                    time: new Date('${order.orderTime}'),
+	                    price: ${order.totalPrice}
+	                },
+	                </c:forEach>
+	        ];
+	
+	        // 計算銷售最佳和最差的前五名
+	        var topFive = getTopFive(orders);
+	        var bottomFive = getBottomFive(orders);
+	
+	        // 繪製銷售最佳和最差的圖表
+	        drawTopBottomChart(topFive, bottomFive);
+	
+	        // 計算兩個時段的營業額加總
+	        var shiftSales = calculateShiftSales(orders);
+	
+	        // 繪製營業額加總圖表
+	        drawShiftSalesChart(shiftSales);
+	    }
+	
+	    function getTopFive(orders) {
+	        orders.sort((a, b) => b.price - a.price);
+	        return orders.slice(0, 5);
+	    }
+	
+	    function getBottomFive(orders) {
+	        orders.sort((a, b) => a.price - b.price);
+	        return orders.slice(0, 5);
+	    }
+	
+	    function calculateShiftSales(orders) {
+	        var morningShift = 0;
+	        var eveningShift = 0;
+	
+	        orders.forEach(order => {
+	            var hours = order.time.getHours();
+	            if (hours >= 10 && hours < 16) {
+	                morningShift += order.price;
+	            } else if (hours >= 17 && hours <= 22) {
+	                eveningShift += order.price;
+	            }
+	        });
+	
+	        return {
+	            morningShift: morningShift,
+	            eveningShift: eveningShift
+	        };
+	    }
+	
+	    function drawTopBottomChart(topFive, bottomFive) {
+	        var data = google.visualization.arrayToDataTable([
+	            ['商品名稱', '總金額'],
+	            ...topFive.map(order => [order.name, order.price])
+	        ]);
+	
+	        var options = {
+	            title: '銷售最佳的前五名',
+	            chartArea: {width: '50%'},
+	            hAxis: {
+	                title: '總金額',
+	                minValue: 0
+	            },
+	            vAxis: {
+	                title: '商品名稱'
+	            }
+	        };
+	
+	        var chart = new google.visualization.BarChart(document.getElementById('top_five_chart'));
+	        chart.draw(data, options);
+	
+	        data = google.visualization.arrayToDataTable([
+	            ['商品名稱', '總金額'],
+	            ...bottomFive.map(order => [order.name, order.price])
+	        ]);
+	
+	        options = {
+	            title: '銷售最差的前五名',
+	            chartArea: {width: '50%'},
+	            hAxis: {
+	                title: '總金額',
+	                minValue: 0
+	            },
+	            vAxis: {
+	                title: '商品名稱'
+	            }
+	        };
+	
+	        chart = new google.visualization.BarChart(document.getElementById('bottom_five_chart'));
+	        chart.draw(data, options);
+	    }
+	
+	    function drawShiftSalesChart(shiftSales) {
+	        var data = google.visualization.arrayToDataTable([
+	            ['時段', '總營業額'],
+	            ['早班 (10:00-16:00)', shiftSales.morningShift],
+	            ['晚班 (17:00-22:00)', shiftSales.eveningShift]
+	        ]);
+	
+	        var options = {
+	            title: '各時段營業額',
+	            chartArea: {width: '50%'},
+	            hAxis: {
+	                title: '總營業額',
+	                minValue: 0
+	            },
+	            vAxis: {
+	                title: '時段'
+	            }
+	        };
+	
+	        var chart = new google.visualization.BarChart(document.getElementById('shift_sales_chart'));
+	        chart.draw(data, options);
+	    }
         
     </script>
 
 	<h2 class="mb-4">統計圖表</h2>
 	<div class="col-12 col-md-6">
-		<div id="genderchart" style="width: 700px; height: 500px;"></div>
+		<div id="top_five_chart" style="width: 900px; height: 500px;"></div>
 	</div>
 	<div class="col-12 col-md-6">
-        <div id="agechart" style="width: 700px; height: 500px;"></div>
+    	<div id="bottom_five_chart" style="width: 900px; height: 500px;"></div>
     </div>
+    	<div class="col-12 col-md-6">
+    	<div id="shift_sales_chart" style="width: 900px; height: 500px;"></div>
+    </div>
+
+   

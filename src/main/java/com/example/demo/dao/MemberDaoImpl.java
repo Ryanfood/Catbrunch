@@ -21,14 +21,14 @@ public class MemberDaoImpl implements MemberDao{
 	// 查詢所有
 	@Override
 	public List<Member> findAllMember() {
-		String sql = "SELECT member_id, account, password, name, gender, birthday, email, phone FROM member";
+		String sql = "SELECT member_id, account, password, name, gender, birthday, email, phone, is_member FROM member";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Member.class));
 	}
 
 	// 根據 ID 單筆查詢，查不到會有 DataAccess 例外
 	@Override
 	public Member findMemberById(Integer memberId) {
-	String sql = "SELECT member_id, account, password, name, gender, birthday, email, phone FROM member WHERE member_id = ?";
+	String sql = "SELECT member_id, account, password, name, gender, birthday, email, phone, is_member FROM member WHERE member_id = ?";
 		
 		try {
 			return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Member.class), memberId);
@@ -41,7 +41,7 @@ public class MemberDaoImpl implements MemberDao{
 	// 根據 Account 單筆查詢，查不到會有 DataAccess 例外
 	@Override
 	public Member findMemberByAccount(String account) {
-		String sql = "SELECT member_id, account, password, salt, name, gender, birthday, email, phone FROM member WHERE account = ?";
+		String sql = "SELECT member_id, account, password, salt, name, gender, birthday, email, phone, is_member FROM member WHERE account = ?";
 		
 		try {
 			return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Member.class), account);
