@@ -34,6 +34,7 @@ public class MemberController {
 		model.addAttribute("memberList", memberList);
 		return "member_backend";
 	}
+	
 	/*
 	@GetMapping("/member_backend")
 	public String getAllMember(Model model) {
@@ -108,7 +109,7 @@ public class MemberController {
     @DeleteMapping("/member_backend/{memberId}")
 	public String deleteMember(@PathVariable("memberId") Integer memberId, Model model) throws Exception {
 		System.out.println("刪除成功，ID為：" + memberId);
-		//memberService.deleteMember(memberId);
+		memberService.deleteMember(memberId);
 		List<Member> memberList = memberService.getAllMember();
 		model.addAttribute("memberList", memberList);
 		// 1.3秒後再跳轉

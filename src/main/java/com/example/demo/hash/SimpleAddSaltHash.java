@@ -12,7 +12,7 @@ public class SimpleAddSaltHash {
 
 	public static void main(String[] args) throws Exception {
 		// 1.設定一個密碼
-		String password = "user1";
+		String password = "user55";
 		
 		// 2.隨機生成一個鹽(Salt)
 		byte[] salt = new byte[16];

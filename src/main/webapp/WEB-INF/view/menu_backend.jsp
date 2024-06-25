@@ -46,7 +46,7 @@
 							<h1 class="m-0 ms-3" id="h1">貓貓後臺</h1>
 						</a>
 						
-						 <p class="hello">歡迎回來，${ member.name }</p>
+						 <p class="hello"></p>
 						
 
 						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -185,10 +185,11 @@
 											</div>
 											<div class="p-2 d-flex mx-auto">
 												<form action="${ pageContext.request.contextPath }/menu_backend/${ menu.menuId }" id="delete-form" method="POST">
-												<a href="${ pageContext.request.contextPath }/menu_backend/${ menu.menuId }" class="btn btn-outline-success me-1">修改</a>
-												<!-- HttpMethod 隱藏欄位 -->
-												<input name="_method" type="hidden" value="delete"/> 
-												<button type="submit" class="btn btn-outline-danger deleteButton ms-1" id="deleteButton">刪除</button>
+													<a href="${ pageContext.request.contextPath }/menu_backend/${ menu.menuId }" class="btn btn-outline-success me-1">修改</a>
+													<!-- HttpMethod 隱藏欄位 -->
+													<input name="_method" type="hidden" value="delete" />
+													<input type="hidden" name="menuId" value="${ menu.menuId }" />
+													<button type="button" class="btn btn-outline-danger deleteButton ms-1" id="deleteButton">刪除</button>
 												</form>
 											</div>
 										</div>

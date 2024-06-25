@@ -183,7 +183,7 @@ $(document).ready(function () {
                         if (response.member.isMember == 1) {
                             // 重導到後台 member_backend 頁面
                             setTimeout(function() {
-                                window.location.href = 'http://localhost:8080/member_backend';
+                                window.location.href = 'http://localhost:8080/menu_backend';
                             }, 1000); // 1000 毫秒 = 1 秒
                         } else {
                             // 非管理者重導到前端頁面
@@ -385,7 +385,7 @@ $(document).ready(function () {
 	$('#forgetButton').on('click', function(e) {
 	    e.preventDefault();
 	    
-	    if (!email) {
+	    if (email === '') {
 	        // 使用 SweetAlert 彈出提示
 	        Swal.fire({
 	            icon: 'warning',
@@ -660,12 +660,6 @@ $(document).ready(function () {
 	    }
 	});
 
-
-	    
-    
-
-    
-    
 
 });
 

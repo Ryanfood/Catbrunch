@@ -58,7 +58,7 @@ public class OrderController {
     @DeleteMapping("/order_backend/{orderId}")
 	public String deleteOrder(@PathVariable("orderId") Integer orderId, Model model) throws Exception {
 		System.out.println("刪除成功，ID為：" + orderId);
-		//orderService.deleteOrder(orderId);
+		orderService.deleteOrder(orderId);
 		List<Order> orderList = orderService.getAllOrder();
 		model.addAttribute("orderList", orderList);
 		// 1.3秒後再跳轉

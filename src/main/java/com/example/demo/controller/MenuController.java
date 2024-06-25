@@ -183,7 +183,7 @@ public class MenuController {
 	@DeleteMapping("/menu_backend/{menuId}")
 	public String deleteMenu(@PathVariable("menuId") Integer menuId, Model model) throws InterruptedException {
 		System.out.println("刪除成功，ID為：" + menuId);
-		// menuService.deleteMenu(menuId);
+		menuService.deleteMenu(menuId);
 		List<Menu> menuList = menuService.getAllMenu();
 		model.addAttribute("menuList", menuList);
 		Thread.sleep(1300);

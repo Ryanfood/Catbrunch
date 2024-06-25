@@ -62,7 +62,7 @@ public class ForgetService {
             
             
             verificationCodes.remove(email);
-            System.out.println(email + "驗證成功，驗證碼已移除：");
+            System.out.println(email + " 驗證成功，驗證碼已移除：");
             return true;
         }
         return false;

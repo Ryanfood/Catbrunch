@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="/css/style.css">
     <!-- 設定網頁 icon -->
     <link rel="icon" href="/img/Logo/Logo.png" type="image/">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- js -->
+    <script src="/js/script.js"></script>
 
     <title>貓貓早午餐Cat Brunch</title>
 </head>
@@ -28,6 +32,7 @@
                             <img src="/img/Logo/Logo.gif" class="Logo" height="90" alt="">
                             <h1 class="m-0 ms-3" id="h1">貓貓早午餐</h1>
                         </a>
+                        <p class="hello">歡迎回來，${ member.name }</p>
 
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false"
@@ -208,7 +213,7 @@
         </div>
 
     </footer>
-
+	<!-- bootstrap5 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

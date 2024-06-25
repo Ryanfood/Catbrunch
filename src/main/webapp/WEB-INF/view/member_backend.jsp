@@ -48,7 +48,7 @@
                             <h1 class="m-0 ms-3" id="h1">貓貓後臺</h1>
                         </a>
 
-                        <p class="hello">歡迎回來，${ member.name }</p>
+                        <p class="hello"></p>
 
 
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -77,7 +77,7 @@
                                     <img class="me-2" src="/img/paw-print.png" alt="">會員</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link logout" id="nav-link" type="button">
+                                    <a class="nav-link logout" href="javascript:void(0);" id="nav-link" type="button">
                                     <img class="me-2" src="/img/paw-print.png" alt="">登出</a>
                                 </li>
                             </ul>

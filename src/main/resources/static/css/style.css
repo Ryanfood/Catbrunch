@@ -270,6 +270,7 @@ video::-webkit-media-controls {
 
 #sec3 {
     margin: 30px 0px;
+    min-height: 475px;
 }
 
 .newstitle {
@@ -278,8 +279,8 @@ video::-webkit-media-controls {
     font-weight: bold;
 }
 
-#sec3 {
-    min-height: 475px;
+#sec3 .btn {
+	font-size: 1.3rem;
 }
 
 .newsbg {
@@ -326,8 +327,6 @@ footer .active {
 }
 
 footer img {
-    /* min-width: 100px;
-  min-height: 100px; */
     max-width: 100px;
     max-height: 100px;
     padding: 0 0 10px 10px;

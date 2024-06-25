@@ -76,11 +76,13 @@ $(document).ready(function () {
   
   // 刪除按鈕
   $('.deleteButton').on('click', function(event) {
-    // 阻止表單的默認提交行為
-    event.preventDefault();
+    event.preventDefault(); // 阻止表單的默認提交行為
+    
+    var form = $(this).closest('form'); // 獲取當前按鈕所在的表單
+    
     // closest 方法找最近具有 list-item 類的父元素，在該元素內部找具有 card-title 類的元素，然後取得文本內容並去除頭尾空白
     var newsName = $(this).closest('.list-item').find('.card-title').text().trim();
-
+	
     // 使用 SweetAlert2 顯示確認提示框
     Swal.fire({
       title: '確定要刪除嗎?',
@@ -100,8 +102,7 @@ $(document).ready(function () {
 	      timer: 1300,
   		  showConfirmButton: false
 	    });
-        // 用戶確認後，可以繼續執行表單的提交操作
-        $('#delete-form').submit();
+        form.submit();
       }
     });
   });

@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.po.News;
 import com.example.demo.service.NewsService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -118,12 +117,12 @@ public class NewsController {
     }    
     
     // 刪除 news
-	@DeleteMapping("/news_backend/{newsId}")
+    @DeleteMapping("/news_backend/{newsId}")
 	public String deleteNews(@PathVariable("newsId") Integer newsId, Model model) throws InterruptedException {
-		//newsService.deleteNews(newsId);
+		System.out.println("刪除成功，ID為：" + newsId);
+		newsService.deleteNews(newsId);
 		List<News> newsList = newsService.getAllNews();
 		model.addAttribute("newsList", newsList);
-		System.out.println("刪除成功，ID為：" + newsId);
 		Thread.sleep(1300);
 		return "news_backend";
 	}
