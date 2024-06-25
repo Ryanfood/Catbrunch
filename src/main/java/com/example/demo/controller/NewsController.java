@@ -72,10 +72,9 @@ public class NewsController {
             news.setNewsImage(newsImage.getOriginalFilename());
         }
 
-        model.addAttribute("_method", "PUT");
 
         
-        // 調用服務方法創建 News
+        // 調用服務方法新增 News
         newsService.createNews(news);
         List<News> newsList = newsService.getAllNews();
         model.addAttribute("news", null);
@@ -83,6 +82,7 @@ public class NewsController {
         model.addAttribute("imgurl", "img/news");
         
         System.out.println("新增成功，ID為：" + news.getNewsId());
+        model.addAttribute("_method", "PUT");
         return "news_backend";
     }
        
@@ -104,7 +104,6 @@ public class NewsController {
 		}
     	news.setNewsImage(newsImage.getOriginalFilename());
     	
-    	model.addAttribute("_method", "PUT");
 
         
         // 調用服務方法更新 News
@@ -112,7 +111,9 @@ public class NewsController {
         List<News> newsList = newsService.getAllNews();
         model.addAttribute("news", null);
         model.addAttribute("newsList", newsList);
+        
         System.out.println("修改成功，ID為：" + newsId);
+        model.addAttribute("_method", "PUT");
         return "news_backend";
     }    
     

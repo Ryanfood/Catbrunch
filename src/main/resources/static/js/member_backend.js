@@ -150,9 +150,7 @@ $(document).ready(function () {
 	      $(".list-item").hide().slice(from, to).show();
 	    }
 	  })
-	  
-	  
-	  
+
 	  
 	// 密碼驗證規則
 	function validatePattern(password) {
@@ -179,9 +177,7 @@ $(document).ready(function () {
 	        $('#updatePassword2')[0].setCustomValidity('');
 	    }
 	});
-	  
-	  
-	  
+
 	  
 	// 修改會員
     $('#updateButton').click(async function() {
@@ -237,11 +233,6 @@ $(document).ready(function () {
 	    
 	  });
 	
-
-	
-	
-	
-
 
 	// 刪除會員
 	$('.deleteButton').click(function(event) {

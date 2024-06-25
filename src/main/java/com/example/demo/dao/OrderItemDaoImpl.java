@@ -29,6 +29,16 @@ public class OrderItemDaoImpl implements OrderItemDao{
 		}
 	}
 
+	// 取得所有 OrderItem
+	@Override
+	public List<OrderItem> fintAllOrderItem() {
+		//String sql = "SELECT order_item_id, order_id, order_name, quantity, price FROM order_items";
+		String sql ="SELECT order_name, SUM(quantity) as quantity "
+				+ "FROM Order_items "
+				+ "GROUP BY order_name "
+				+ "ORDER BY quantity DESC;";
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderItem.class));
+	}
 	
 
 

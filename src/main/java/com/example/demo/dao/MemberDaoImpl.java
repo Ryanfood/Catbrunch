@@ -138,6 +138,25 @@ public class MemberDaoImpl implements MemberDao{
         }
 	}
 
+	@Override
+	public Member findMemberByEmail(String email) {
+	    String sql = "SELECT member_id, account, password, salt, name, gender, birthday, email, phone, is_member FROM member WHERE email = ?";
+	    try {
+	        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Member.class), email);
+	    } catch (DataAccessException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+
+	// 修改密碼及鹽值
+	@Override
+	public void update(Member member) {
+	    String sql = "UPDATE member SET password = ?, salt = ? WHERE email = ?";
+	    jdbcTemplate.update(sql, member.getPassword(), member.getSalt(), member.getEmail());
+	}
+
+	
 
 
 }

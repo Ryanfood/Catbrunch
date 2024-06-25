@@ -167,10 +167,7 @@
 
                     </div>
                 </div>
-                
-                <!-- 
-                    <h2 class="mt-2">購物車</h2> 
-                --> 
+
                 <select class="form-select w-25 me-auto" required>
 					<option selected disabled>請選擇桌號</option>
 					<option value="1">1號桌</option>
@@ -212,8 +209,6 @@
             </div>
         </div>
     </section>
-
-
 
     <!-- footer 區域 頁尾 -->
     <footer>

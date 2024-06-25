@@ -146,7 +146,7 @@ $(document).ready(function() {
                 success: function(data) {
 
                     // 遍歷陣列並顯示資料
-                    var output = "<div class='d-flex justify-content-between'><h3>訂單編號：" + id + "</h3> <h3>桌號：" + tableNumber + "</h3></div>";
+                    var output = "<div class='d-flex justify-content-between'><h3>訂單編號：" + id + "</h3></div>";
                     output += "<h3>桌號：" + tableNumber + "</h3>";
                     output += "<table class='table table-striped table-bordered text-center table-hover'>";
                     output += "<thead><tr><th>餐點名稱</th><th>數量</th><th>單價</th><th>總價</th></tr></thead><tbody>";

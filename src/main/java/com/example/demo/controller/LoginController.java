@@ -52,10 +52,9 @@ public class LoginController {
     
     // 登出
     @GetMapping("/logout")
-    private String logout(HttpSession session) throws InterruptedException {
+    private String logout(HttpSession session) {
 		System.out.println("登出成功");
     	session.invalidate();
-    	Thread.sleep(800);
     	return "redirect:/index";
     }
     

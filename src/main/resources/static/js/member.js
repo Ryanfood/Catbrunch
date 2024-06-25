@@ -17,19 +17,44 @@ $(document).ready(function () {
     iconEye.toggleClass('d-none');
     iconEyeSlash.toggleClass('d-none');
   });
-
-  // login 和 register 對調
-  $('#register').on('click', function(e) {
-    e.preventDefault();
-    $('.login').addClass('d-none');
-    $('.register').removeClass('d-none');
-  });
-
-  $('#login').on('click', function(e) {
-    e.preventDefault();
-    $('.register').addClass('d-none');
+  
+	// 頁面加載時，顯示登入表單（.login），隱藏註冊表單（.register）和忘記密碼表單（.forget）
     $('.login').removeClass('d-none');
-  });
+    $('.register').addClass('d-none');
+    $('.forget').addClass('d-none');
+
+    // 切換到註冊表單
+    $('#toRegister').on('click', function(e) {
+        e.preventDefault();
+        $('.login').addClass('d-none');
+        $('.register').removeClass('d-none');
+        $('.forget').addClass('d-none');
+    });
+
+    // 切換到登入表單
+    $('#toLogin').on('click', function(e) {
+        e.preventDefault();
+        $('.register').addClass('d-none');
+        $('.login').removeClass('d-none');
+        $('.forget').addClass('d-none');
+    });
+
+    // 切換到忘記密碼表單
+    $('#toForget').on('click', function(e) {
+        e.preventDefault();
+        $('.login').addClass('d-none');
+        $('.register').addClass('d-none');
+        $('.forget').removeClass('d-none');
+    });
+
+    // 從忘記密碼表單切換到登入表單
+    $('#toLoginFromForget').on('click', function(e) {
+        e.preventDefault();
+        $('.forget').addClass('d-none');
+        $('.login').removeClass('d-none');
+        $('.register').addClass('d-none');
+    });
+  
 
   
     // 傳送帳號及密碼
@@ -320,12 +345,330 @@ $(document).ready(function () {
 	        }
 	    });
 	});
+	
+	
+	
+	// 初始倒數時間（秒）
+    var countdown = 60;
+
+    function startCountdown() {
+        // 禁用按鈕
+        $('#forgetButton').prop('disabled', true);
+
+        // 更新按鈕文字顯示
+        $('#forgetButton').text(countdown + ' 秒後傳送驗證碼');
+
+        // 倒數計時器
+        var timer = setInterval(function() {
+            countdown--;
+            $('#forgetButton').text(countdown + ' 秒後傳送驗證碼');
+            if (countdown <= 0) {
+                // 倒數計時結束，啟用按鈕並重置倒數時間
+                clearInterval(timer);
+                $('#forgetButton').prop('disabled', false);
+                $('#forgetButton').text('傳送驗證碼');
+                countdown = 60; // 重置倒數時間
+            }
+        }, 1000);
+    }
+
+	// Email 名稱只顯示前3內容，後面加 * 符號
+	function maskEmail(email) {
+	    let atIndex = email.indexOf('@');
+	    let namePart = email.substring(0, atIndex);
+	    let domainPart = email.substring(atIndex);
+	    let maskedNamePart = namePart.substring(0, 3) + '*'.repeat(namePart.length - 3);
+	    return maskedNamePart + domainPart;
+	}
+	    
+    // 寄送 Email 驗證碼
+	$('#forgetButton').on('click', function(e) {
+	    e.preventDefault();
+	    
+	    if (!email) {
+	        // 使用 SweetAlert 彈出提示
+	        Swal.fire({
+	            icon: 'warning',
+	            title: '請先輸入Email'
+	        });
+	        return; // 終止函數的執行
+	    }
+		    
+	    
+	    var email = $('#forgetEmail').val();
+	    let maskedEmail = maskEmail(email);
+	    if (email) {
+	        $.ajax({
+	            url: '/forget',
+	            type: 'POST',
+	            data: JSON.stringify({ email: email }),
+	            contentType: 'application/json',
+	            beforeSend: function() {
+	                Swal.fire({
+	                    title: '正在發送驗證碼...',
+	                    allowOutsideClick: false,
+	                    timer: 3000, // 設定發送驗證碼的超時時間，這裡設定為3秒
+	                    timerProgressBar: true,
+	                    didOpen: () => {
+	                        Swal.showLoading();
+	                        const timer = Swal.getPopup().querySelector('.swal2-timer-progress-bar');
+	                        timerInterval = setInterval(() => {
+	                            const remainingTime = Swal.getTimerLeft();
+	                            const progressBarWidth = (remainingTime / 3000) * 100; // 3000 是設定的計時器時間
+	                            timer.style.width = progressBarWidth + '%';
+	                        }, 100);
+	                    },
+	                    willClose: () => {
+	                        clearInterval(timerInterval);
+	                    }
+	                }).then((result) => {
+	                    if (result.dismiss === Swal.DismissReason.timer) {
+	                        console.log('I was closed by the timer');
+	                    }
+	                });
+	            },
+	            success: function(response) {
+					// 倒數一分鐘後才可以再傳送驗證碼
+					startCountdown();
+	                Swal.fire({
+	                    icon: 'success',
+	                    iconColor: '#4CAF50',
+	                    title: '驗證碼已發送到您的信箱 ' + maskedEmail
+
+	                });
+	            },
+	            error: function(error) {
+	                Swal.fire({
+	                    icon: 'error',
+	                    title: '傳送驗證碼失敗',
+	                    timer: 3000,
+	                    timerProgressBar: true
+	                });
+	            }
+	        });
+	    } else {
+	        Swal.fire({
+	            icon: 'error',
+	            title: '請輸入有效的電子郵件地址',
+	            timer: 3000,
+	            timerProgressBar: true
+	        });
+	    }
+	});
+
+	// 變更密碼時驗證Email是否存在
+	$('#forgetEmail').on('input', function() {
+	    var email = $(this).val();
+
+	    // 使用 AJAX 發送請求檢查 Email 是否存在
+	    $.ajax({
+	        type: 'GET',
+	        url: 'http://localhost:8080/member_backend/checkEmail',
+	        data: { email: email },
+	        success: function(response) {
+	            if (response.exists || email === '') {
+	                $('#changeMailError').css('display', 'none');
+	                // 讓傳送驗證碼按鈕可以按
+	                $('#forgetButton').prop('disabled', false);
+	                $('#changeButton').prop('disabled', false);
+	            } else {
+	                $('#changeMailError').css('display', 'block');
+	                // 讓傳送驗證碼按鈕不能按
+	                $('#forgetButton').prop('disabled', true);
+	                $('#changeButton').prop('disabled', true);
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            console.error('Error:', error);
+	        }
+	    });
+	});
+
+
+	// 當點擊驗證按鈕時
+	$('#verifyCodeButton').click(function() {
+	    var code = $('#verificationCode').val();
+	    var email = $('#updateEmail').val(); // 從表單中獲取 Email
+	
+	    // 使用 AJAX 向後端驗證驗證碼是否正確
+	    $.ajax({
+	        type: 'POST',
+	        url: '/verify-code', // 請根據你的後端端點來修改
+	        data: JSON.stringify({ email: email, code: code }),
+	        contentType: 'application/json',
+	        success: function(response) {
+	            if (response === '驗證成功') {
+	                // 隱藏驗證相關的元素，顯示修改密碼相關的元素
+	                $('#updateEmail').closest('.input-group').hide();
+	                $('label[for="email"]').hide();
+	                $('#verificationCode').closest('.input-group').hide();
+	                $('label[for="verificationCode"]').hide();
+	                $('#verifyCodeButton').hide();
+	                $('#passwordFields').show();
+	                $('#updateButton').show();
+	                $('#codeError').hide();
+	
+	                // 彈出成功提示訊息
+	                Swal.fire({
+	                    icon: 'success',
+	                    iconColor: '#4CAF50',
+	                    title: '驗證碼輸入正確',
+	                    showConfirmButton: false,
+	                    timer: 1500
+	                });
+	            } else {
+	                // 驗證碼錯誤，彈出 SweetAlert 提示訊息
+	                Swal.fire({
+	                    icon: 'error',
+	                    title: '驗證碼錯誤，請確認。',
+	                    timer: 3000,
+	                    timerProgressBar: true
+	                });
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            console.error('Error:', error);
+	        }
+	    });
+	});
+    
+    
+	// 當點擊變更密碼按鈕時
+    $('#changeButton').click(function(event) {
+        // 確保 Email 欄位非空
+        var email = $('#forgetEmail').val();
+        if (email.trim() !== '') {
+            $('#updateEmail').val(email);
+
+            // 重置表單欄位
+            $('#updateMemberForm')[0].reset();
+
+            // 重置元素的顯示狀態
+            $('#updateEmail').closest('.input-group').show();
+            $('label[for="email"]').show();
+            $('#verificationCode').closest('.input-group').show();
+            $('label[for="verificationCode"]').show();
+            $('#verifyCodeButton').show();
+            $('#passwordFields').hide();
+            $('#updateButton').hide();
+            $('#codeError').hide();
+
+            // 顯示 Modal
+            $('#changePassword').modal('show');
+        } else {
+            // 阻止默認行為（防止跳出 Modal）
+            event.preventDefault();
+
+            // 使用 SweetAlert 彈出提示
+            Swal.fire({
+                icon: 'warning',
+                title: '請先輸入Email'
+            });
+        }
+    });
+    
+    // 按下變更密碼按鈕後，把 Email 的值傳給 Modal
+	$('#changeButton').click(function() {
+        var email = $('#forgetEmail').val();
+        $('#updateEmail').val(email);
+    });
+    
+    
+    // 當點擊驗證按鈕時
+	$('#verifyCodeButton').click(function() {
+	    var code = $('#verificationCode').val();
+	    var email = $('#updateEmail').val(); // 從表單中獲取 Email
+	
+	    // 使用 AJAX 向後端驗證驗證碼是否正確
+	    $.ajax({
+	        type: 'POST',
+	        url: '/verify-code', // 請根據你的後端端點來修改
+	        data: JSON.stringify({ email: email, code: code }),
+	        contentType: 'application/json',
+	        success: function(response) {
+	            if (response === '驗證成功') {
+	                // 顯示修改密碼的表單
+	                $('#passwordFields').show();
+	                $('#updateButton').show();
+	                $('#verifyCodeButton').hide();
+	            } else {
+	                // 驗證碼錯誤，彈出 SweetAlert 提示訊息
+	                Swal.fire({
+	                    icon: 'error',
+	                    title: '驗證碼錯誤，請確認。',
+	                    timer: 2000,
+	                    timerProgressBar: true
+	                });
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            console.error('Error:', error);
+	        }
+	    });
+	});
+
+	
+	// 密碼驗證規則
+	function validatePattern(password) {
+	    var pattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/;
+	    return pattern.test(password);
+	}
+
+	
+	// 在點擊修改密碼按鈕時進行新密碼格式驗證
+	$('#updateButton').click(function() {
+	    var newPassword = $('#newPassword').val();
+	    var newPassword2 = $('#newPassword2').val();
+	    var email = $('#updateEmail').val(); // 從表單中獲取 Email
+	
+	    // 檢查兩次輸入的新密碼是否一致
+	    if (newPassword !== newPassword2) {
+	        Swal.fire({
+	            icon: 'error',
+	            title: '新密碼與確認密碼不一致。',
+	            showConfirmButton: false,
+	            timer: 1500
+	        });
+	    } else if (!validatePattern(newPassword)) { // 新密碼格式驗證
+	        Swal.fire({
+	            icon: 'error',
+	            title: '密碼必須至少包含一個字母、一個數字，且至少6個字符。'
+	        });
+	    } else {
+	        // 使用 AJAX 向後端提交修改密碼的請求
+	        $.ajax({
+	            type: 'PUT',
+	            url: '/reset-password',
+	            data: JSON.stringify({ email: email, newPassword: newPassword }),
+	            contentType: 'application/json',
+	            success: function(response) {
+	                Swal.fire({
+	                    icon: 'success',
+	                    iconColor: '#4CAF50',
+	                    title: '密碼修改成功！', 
+	                    showConfirmButton: false,
+	                    timer: 1300
+	                }).then(function() {
+	                    // 跳轉到 member 頁面
+	                    window.location.href = '/member'; 
+	                });
+	            },
+	            error: function(xhr, status, error) {
+	                console.error('Error:', error);
+	            }
+	        });
+	    }
+	});
+
+
 	    
     
 
     
     
+
 });
+
 
 
 

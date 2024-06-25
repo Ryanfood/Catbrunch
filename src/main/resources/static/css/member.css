@@ -52,20 +52,23 @@
 }
 
 #sec2 .login h2,
-#sec2 .register h2 {
+#sec2 .register h2,
+#sec2 .forget h2 {
     text-align: center;
     font-size: 40px;
 }
 
 #sec2 .login p,
-#sec2 .register p {
+#sec2 .register p,
+#sec2 .forget p {
     text-align: center;
     text-indent: 0;
     font-size: 1.2rem;
 }
 
 .login label,
-.register label {
+.register label,
+.forget label {
     font-size: 24px;
 }
 
@@ -87,7 +90,8 @@
 }
 
 #sec2 .login button,
-#sec2 .register button {
+#sec2 .register button,
+#sec2 .forget button {
     width: 60%;
     justify-content: center;
     font-size: 20px;
@@ -96,7 +100,8 @@
 }
 
 #sec2 .login button:hover,
-#sec2 .register button:hover {
+#sec2 .register button:hover,
+#sec2 .forget button:hover {
     background-color: rgb(10, 90, 180);
 }
 
@@ -172,4 +177,34 @@
     .col-sm-4 label {
         margin-left: 10px;
     }
+}
+
+/* 忘記密碼 */
+
+.forget {
+    min-width: 300px;
+    max-width: 370px;
+    padding: 30px 20px;
+    margin: 0px 10px;
+    background-color: var(--c-base-07);
+    border-radius: 25px;
+}
+
+#changePassword input{
+
+	min-width: 420px;
+}
+
+/* 修改表單 */
+.modal-content .btn {
+    border-radius: 10px;
+    font-size: 1.5rem;
+}
+
+.modal-header {
+	background-color: var(--c-sub2-10);
+}
+
+.modal-body {
+	background-color: var(--c-sub1-10);
 }

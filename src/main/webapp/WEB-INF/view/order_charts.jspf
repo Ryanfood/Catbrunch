@@ -1,149 +1,162 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
 <!-- Tomcat 10.x JSTL -->
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!-- Spring Form 表單標籤 -->
-<%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form" %>
 
 <!-- 統計資料 -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-	    google.charts.load('current', {'packages':['corechart', 'bar']});
-	    google.charts.setOnLoadCallback(drawCharts);
-	
-	    function drawCharts() {
-	        // 從 JSP 頁面獲取數據並轉換為 JavaScript 數組
-	        var orders = [
-	            <c:forEach var="order" items="${orderList}">
-	                {
-	                    name: '${order.orderName}',
-	                    time: new Date('${order.orderTime}'),
-	                    price: ${order.totalPrice}
-	                },
-	                </c:forEach>
-	        ];
-	
-	        // 計算銷售最佳和最差的前五名
-	        var topFive = getTopFive(orders);
-	        var bottomFive = getBottomFive(orders);
-	
-	        // 繪製銷售最佳和最差的圖表
-	        drawTopBottomChart(topFive, bottomFive);
-	
-	        // 計算兩個時段的營業額加總
-	        var shiftSales = calculateShiftSales(orders);
-	
-	        // 繪製營業額加總圖表
-	        drawShiftSalesChart(shiftSales);
-	    }
-	
-	    function getTopFive(orders) {
-	        orders.sort((a, b) => b.price - a.price);
-	        return orders.slice(0, 5);
-	    }
-	
-	    function getBottomFive(orders) {
-	        orders.sort((a, b) => a.price - b.price);
-	        return orders.slice(0, 5);
-	    }
-	
-	    function calculateShiftSales(orders) {
-	        var morningShift = 0;
-	        var eveningShift = 0;
-	
-	        orders.forEach(order => {
-	            var hours = order.time.getHours();
-	            if (hours >= 10 && hours < 16) {
-	                morningShift += order.price;
-	            } else if (hours >= 17 && hours <= 22) {
-	                eveningShift += order.price;
-	            }
-	        });
-	
-	        return {
-	            morningShift: morningShift,
-	            eveningShift: eveningShift
-	        };
-	    }
-	
-	    function drawTopBottomChart(topFive, bottomFive) {
-	        var data = google.visualization.arrayToDataTable([
-	            ['商品名稱', '總金額'],
-	            ...topFive.map(order => [order.name, order.price])
-	        ]);
-	
-	        var options = {
-	            title: '銷售最佳的前五名',
-	            chartArea: {width: '50%'},
-	            hAxis: {
-	                title: '總金額',
-	                minValue: 0
-	            },
-	            vAxis: {
-	                title: '商品名稱'
-	            }
-	        };
-	
-	        var chart = new google.visualization.BarChart(document.getElementById('top_five_chart'));
-	        chart.draw(data, options);
-	
-	        data = google.visualization.arrayToDataTable([
-	            ['商品名稱', '總金額'],
-	            ...bottomFive.map(order => [order.name, order.price])
-	        ]);
-	
-	        options = {
-	            title: '銷售最差的前五名',
-	            chartArea: {width: '50%'},
-	            hAxis: {
-	                title: '總金額',
-	                minValue: 0
-	            },
-	            vAxis: {
-	                title: '商品名稱'
-	            }
-	        };
-	
-	        chart = new google.visualization.BarChart(document.getElementById('bottom_five_chart'));
-	        chart.draw(data, options);
-	    }
-	
-	    function drawShiftSalesChart(shiftSales) {
-	        var data = google.visualization.arrayToDataTable([
-	            ['時段', '總營業額'],
-	            ['早班 (10:00-16:00)', shiftSales.morningShift],
-	            ['晚班 (17:00-22:00)', shiftSales.eveningShift]
-	        ]);
-	
-	        var options = {
-	            title: '各時段營業額',
-	            chartArea: {width: '50%'},
-	            hAxis: {
-	                title: '總營業額',
-	                minValue: 0
-	            },
-	            vAxis: {
-	                title: '時段'
-	            }
-	        };
-	
-	        var chart = new google.visualization.BarChart(document.getElementById('shift_sales_chart'));
-	        chart.draw(data, options);
-	    }
-        
-    </script>
+    google.charts.load('current', {'packages':['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawChart);
 
-	<h2 class="mb-4">統計圖表</h2>
+    
+    function drawChart() {
+    	drawTopFiveChart();
+    	drawBottomFiveChart();
+    	drawShiftSalesChart();
+    }
+    
+    // 畫出銷售最好前五名
+    function drawTopFiveChart() {
+    	
+    	var orderItemsList = [
+    	    <c:forEach var="item" items="${orderItemList}" varStatus="loop">
+    	    {   
+    	        orderName: '${item.orderName}', 
+    	        quantity: ${item.quantity},
+    	        color: '${loop.index == 0 ? "#75D5FD" : loop.index == 1 ? "#FF9DE6" : loop.index == 2 ? "#FF9472" : loop.index == 3 ? "#7BF1A8" : "#7D7AF4"}'
+    	    },
+    	    </c:forEach>
+    	];
+    	
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', '產品名稱');
+        data.addColumn('number', '數量');
+        data.addColumn({type: 'string', role: 'style'}); // 新增顏色欄位
+
+        // 將 orderItemsList 中的前五個項目添加到 DataTable 中，並指定顏色
+        orderItemsList.slice(0, 5).forEach(item => {
+            data.addRow([item.orderName, item.quantity, item.color]);
+        });
+
+        var options = {
+            title: '銷售最佳的前五名產品',
+            backgroundColor: '#FFFAE6',
+            fontSize: 28,
+            fontName: 'cat',
+            legend: { position: 'none' } // 移除圖表旁邊的小藍色方塊
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('top_five_chart'));
+        chart.draw(data, options);
+    }
+    
+    // 畫出銷售最差後五名
+    function drawBottomFiveChart() {
+        var orderItemsList = [
+            <c:forEach var="item" items="${orderItemList}" varStatus="loop">
+            {   
+                orderName: '${item.orderName}', 
+                quantity: ${item.quantity},
+                color: '${loop.index == orderItemList.size() - 1 ? "#75D5FD" : loop.index == orderItemList.size() - 2 ? "#FF9DE6" : loop.index == orderItemList.size() - 3 ? "#FF9472" : loop.index == orderItemList.size() - 4 ? "#7BF1A8" : "#7D7AF4"}'
+            },
+            </c:forEach>
+        ];
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', '產品名稱');
+        data.addColumn('number', '數量');
+        data.addColumn({type: 'string', role: 'style'}); // 新增顏色欄位
+
+        // 將 orderItemsList 中的後五個項目添加到 DataTable 中，並指定顏色
+        orderItemsList.slice(-5).forEach(item => {
+            data.addRow([item.orderName, item.quantity, item.color]);
+        });
+
+        var options = {
+            title: '銷售最差的後五名產品',
+            backgroundColor: '#FFFAE6',
+            fontSize: 28,
+            fontName: 'cat',
+            legend: { position: 'none' } // 移除圖表旁邊的小藍色方塊
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('bottom_five_chart'));
+        chart.draw(data, options);
+    }
+    
+    // 畫出早晚班圖
+    function drawShiftSalesChart() {
+        // 從 JSP 頁面獲取數據並轉換為 JavaScript 數組
+        var orders = [
+            <c:forEach var="order" items="${orderList}">
+                {
+                    name: '${order.orderName}',
+                    time: new Date('${order.orderTime}'),
+                    price: ${order.totalPrice}
+                },
+            </c:forEach>
+        ];
+
+        // 計算兩個時段的營業額加總
+        var shiftSales = calculateShiftSales(orders);
+
+        var data = google.visualization.arrayToDataTable([
+            ['時段', '總營業額', { role: 'style' }],
+            ['早班', shiftSales.morningShift, 'color: #34A853'],
+            ['晚班', shiftSales.eveningShift, 'color: #EA4335']
+        ]);
+
+        var options = {
+            title: '各時段營業額',
+            is3D: true,
+            backgroundColor: '#FFFAE6',
+            fontSize: 28,
+            fontName: 'cat',
+            legend: { position: 'bottom' },
+            
+        };
+     	// PieChart, BarChart, ColumnChart, LineChart
+        var chart = new google.visualization.PieChart(document.getElementById('shift_sales_chart'));
+        chart.draw(data, options);
+    }
+
+    function calculateShiftSales(orders) {
+        var morningShift = 0;
+        var eveningShift = 0;
+
+        orders.forEach(order => {
+            var hours = order.time.getHours();
+            if (hours >= 10 && hours < 16) {
+                morningShift += order.price;
+            } else if (hours >= 17 && hours <= 22) {
+                eveningShift += order.price;
+            }
+        });
+
+        return {
+            morningShift: morningShift,
+            eveningShift: eveningShift
+        };
+    }
+
+    
+</script>
+
+
 	<div class="col-12 col-md-6">
-		<div id="top_five_chart" style="width: 900px; height: 500px;"></div>
+	    <div id="top_five_chart" style="width: 700px; height: 500px;"></div>
 	</div>
+	
 	<div class="col-12 col-md-6">
-    	<div id="bottom_five_chart" style="width: 900px; height: 500px;"></div>
-    </div>
-    	<div class="col-12 col-md-6">
-    	<div id="shift_sales_chart" style="width: 900px; height: 500px;"></div>
-    </div>
-
-   
+	    <div id="bottom_five_chart" style="width: 700px; height: 500px;"></div>
+	</div>
+	
+	<div class="col-12 col-md-6">
+	    <div id="shift_sales_chart" style="width: 700px; height: 500px;"></div>
+	</div>
+	

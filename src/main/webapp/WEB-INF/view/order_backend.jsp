@@ -182,9 +182,9 @@
     </div>
 
    <!-- 圖表區 -->
-	<section id="sec2">
+	<section id="sec2" class="mb-5">
         <div class="container-xl">
-            <div class="row">
+            <div class="row justify-content-center">
 				<%@ include file="order_charts.jspf" %>
             </div>
         </div>

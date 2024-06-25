@@ -21,10 +21,15 @@ public class OrderService {
 	
 	@Autowired
 	private OrderItemDao orderItemDao;
-	// 原本的
-	// 取得多筆 order
+	
+	// 取得多筆 Order
 	public List<Order> getAllOrder() {
 		return orderDao.findAllOrder();
+	}
+	
+	//取得多筆 OrderItem
+	public List<OrderItem> getAllOrderItem() {
+		return orderItemDao.fintAllOrderItem();
 	}
 	
 	

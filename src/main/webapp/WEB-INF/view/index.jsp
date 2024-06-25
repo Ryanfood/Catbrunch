@@ -141,8 +141,6 @@
         </div>
     </section>
 
-
-
     <!-- section3 區域 News活動 -->
     <section id="sec3">
 

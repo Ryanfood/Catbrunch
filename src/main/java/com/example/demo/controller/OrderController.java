@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,17 +25,13 @@ public class OrderController {
 	// 將資料傳到 order_backend
 	@GetMapping("/order_backend")
 	public String getAllOrder(Model model) {
+		// 取得 orderList
 		List<Order> orderList = orderService.getAllOrder();
 		model.addAttribute("orderList", orderList);
 		
-		/*
-		Map<Integer, Object> orderMap = new HashMap<>();
-		for (Order order : orderList) {
-			List<OrderItem> orderItems = orderService.getOrderItemById(order.getOrderId());
-			orderMap.put(order.getOrderId(), orderItems);
-		}
-		model.addAttribute("orderItems", orderMap);
-		*/
+		// 取得 orderItemsList
+		List<OrderItem> orderItemsList = orderService.getAllOrderItem();
+		model.addAttribute("orderItemList", orderItemsList);
 
 		return "order_backend";
 	}
@@ -52,9 +45,6 @@ public class OrderController {
 			
 		return orderItems;
 	}
-	
-	
-
 	
 	// 新增 order
 	@PostMapping("/order_backend/")

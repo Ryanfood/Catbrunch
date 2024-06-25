@@ -122,7 +122,7 @@
 							<div class="image-preview card-img-top img-fluid" id="imagePreview">
 								<label for="image">圖片上傳：</label>
 								<img id="previewImg" src="/img/menu/${ menu.mealType }/${ menu.mealImage }" class="card-img-top img-fluid" alt="...">
-								<input type="file" id="Image" name="file" class="form-control-file" accept="image/jpeg, image/png, image/jpg" value="${ menu.mealImage }" required>
+								<input type="file" id="mealImage" name="file" class="form-control-file" accept="image/*,.jpg,.jpeg,.png,.gif" value="${ menu.mealImage }" required>
 							</div>
 						</div> 
 						<button type="submit" class="btn mt-3" data-action="${ _method eq 'PUT' ? 'update' : 'create' }">

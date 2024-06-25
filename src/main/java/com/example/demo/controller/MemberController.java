@@ -34,7 +34,37 @@ public class MemberController {
 		model.addAttribute("memberList", memberList);
 		return "member_backend";
 	}
-	
+	/*
+	@GetMapping("/member_backend")
+	public String getAllMember(Model model) {
+	    List<Member> memberList = memberService.getAllMember();
+
+	    // 處理每個會員的姓名、電子郵件和手機號碼
+	    for (Member member : memberList) {
+	        // 處理姓名
+	        String name = member.getName();
+	        if (name.length() > 2) {
+	            String middlePart = "<i class=\"fa fa-paw\"></i>".repeat(name.length() - 2);
+	            String maskedName = name.charAt(0) + middlePart + name.charAt(name.length() - 1);
+	            member.setName(maskedName);
+	        }
+
+	        // 處理電子郵件
+	        String email = member.getEmail();
+	        int atIndex = email.indexOf('@');
+	        String maskedEmail = email.substring(0, 3) + "*".repeat(atIndex - 3) + email.substring(atIndex);
+	        member.setEmail(maskedEmail);
+
+	        // 處理手機號碼
+	        String phone = member.getPhone();
+	        String maskedPhone = phone.substring(0, 3) + "*".repeat(phone.length() - 6) + phone.substring(phone.length() - 3);
+	        member.setPhone(maskedPhone);
+	    }
+
+	    model.addAttribute("memberList", memberList);
+	    return "member_backend";
+	}
+	*/
 	
 	// 新增 member
     @PostMapping("/member_backend/")
@@ -86,31 +116,7 @@ public class MemberController {
 		return "member_backend";
 	}
     
-    /*
-    // 登入
-    // @ResponseBody 和 @RequestBody 是用 Ajax 沒有刷新頁面時使用
-    @PostMapping("/login")
-    @ResponseBody
-    public ResponseEntity<?> login(@RequestBody Map<String, String> map, HttpSession session) throws Exception {
-    	Member member = new Member();
-    	try {
-    		member = memberService.login(map.get("account"), map.get("password"));
-    		
-    	} catch (Exception e) {
-    		
-    	}
-    	
-    	// member 是傳給前端的資料
-    	Map<String, Object> result = new HashMap<>();
-    	result.put("member", member);
-    	
-    	session.setAttribute("loginStatus", true);
-    	
-    	return ResponseEntity.ok(result);
-	}
-	*/
 
-    
 	// 檢查 Account 帳號是否存在
 	@GetMapping("/member_backend/checkAccount")
 	@ResponseBody

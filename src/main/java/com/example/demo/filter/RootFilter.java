@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter({"/menu_backend", "/news_backend", "/order_backend", "/member_backend"})
+@WebFilter({"/menu_backend", "/news_backend", "/member_backend"})
 public class RootFilter extends HttpFilter{
 
 	/**

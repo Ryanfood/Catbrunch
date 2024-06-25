@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,7 +38,7 @@ public class MenuController {
 		return "menu";
 	}
 
-	// 將資料傳到 menu
+	// 將資料傳到 order
 	@GetMapping("/order")
 	public String getAllOrder(Model model) {
 		// List<Menu> menuList = menuService.getAllMenu();
@@ -115,20 +116,14 @@ public class MenuController {
 
 	// 新增 menu
 	@PostMapping("/menu_backend/")
-	public String createMenu(@ModelAttribute Menu menu,
-			// @RequestParam("mealName") String mealName,
-			// @RequestParam("mealType") String mealType,
-			// @RequestParam("description") String description,
-			// @RequestParam("mealPrice") Integer mealPrice,
-			@RequestParam("file") MultipartFile mealImage, Model model) {
-		// Menu menu = new Menu();
-		// menu.setMealName(mealName);
-		// menu.setMealType(mealType);
-		// menu.setDescription(description);
-		// menu.setMealPrice(mealPrice);
-		menu.setMealImage(mealImage.getOriginalFilename());
+	public String createMenu(@RequestParam("file") MultipartFile mealImage,
+							 @Validated Menu menu,
+							 Model model) {
+		
+		//menu.setMealImage(mealImage.getOriginalFilename());
 
 		if (!mealImage.isEmpty()) {
+			// 將圖片存到對應路徑
 			File file = new File("src/main/resources/static/img/menu/" + menu.getMealType(),
 					mealImage.getOriginalFilename());
 			try (FileOutputStream out = new FileOutputStream(file)) {
@@ -140,11 +135,10 @@ public class MenuController {
 			menu.setMealImage(mealImage.getOriginalFilename());
 		}
 
-		// 新增菜單
+		// 調用服務方法新增 menu
 		menuService.createMenu(menu);
-
 		List<Menu> menuList = menuService.getAllMenu();
-		model.addAttribute("menu", menu);
+		model.addAttribute("menu", null);
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("mealType", menu.getMealType());
 
@@ -155,20 +149,12 @@ public class MenuController {
 
 	// 修改 menu
 	@PutMapping("/menu_backend/{menuId}")
-	public String upddateMenu(@ModelAttribute Menu menu, @PathVariable("menuId") Integer menuId,
-			// @RequestParam("mealName") String mealName,
-			// @RequestParam("mealType") String mealType,
-			// @RequestParam("description") String description,
-			// @RequestParam("mealPrice") String mealPrice,
-			@RequestParam("file") MultipartFile mealImage, Model model) {
+	public String upddateMenu(@PathVariable("menuId") Integer menuId,
+							  @RequestParam("file") MultipartFile mealImage, 
+							  @ModelAttribute Menu menu, 
+							  Model model) {
 
-		// 將 menu 的資料傳進來
-		// Menu menu = new Menu();
-		// menu.setMealName(mealName);
-		// menu.setMealType(mealType);
-		// menu.setDescription(description);
-		// menu.setMealPrice(Integer.valueOf(mealPrice));
-		menu.setMealImage(mealImage.getOriginalFilename());
+
 
 		// 將圖片存到對應路徑
 		File file = new File("src/main/resources/static/img/menu/" + menu.getMealType(),
@@ -179,10 +165,10 @@ public class MenuController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		menu.setMealImage(mealImage.getOriginalFilename());
 
-		// 修改菜單
+		// 調用服務方法更新 Menu
 		menuService.updateMenu(menuId, menu);
-		// 調用服務方法更新 News
 		List<Menu> menuList = menuService.getAllMenu();
 		model.addAttribute("menu", menu);
 		model.addAttribute("menuList", menuList);

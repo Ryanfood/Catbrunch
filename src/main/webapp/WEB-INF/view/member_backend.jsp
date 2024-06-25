@@ -103,15 +103,15 @@
                 <div id="list-wrapper" class="table-responsive">
                     <table id="memberTable" class="table table-striped table-hover table-bordered text-center">
                         <thead>
-                            <tr>
+                            <tr class="member-row">
                                 <th>編號 <img src="/img/icons/down.svg" alt=""></th>
                                 <th>帳號 <img src="/img/icons/down.svg" alt=""></th>
-                                <th>密碼 <img src="/img/icons/down.svg" alt=""></th>
-                                <th>姓名 <img src="/img/icons/down.svg" alt=""></th>
+                                <th class="d-none">密碼 <img src="/img/icons/down.svg" alt=""></th>
+                                <th class="name-cell">姓名 <img src="/img/icons/down.svg" alt=""></th>
                                 <th>性別 <img src="/img/icons/down.svg" alt=""></th>
                                 <th>生日 <img src="/img/icons/down.svg" alt=""></th>
-                                <th>信箱 <img src="/img/icons/down.svg" alt=""></th>
-                                <th>手機號碼 <img src="/img/icons/down.svg" alt=""></th>
+                                <th class="email-cell">信箱 <img src="/img/icons/down.svg" alt=""></th>
+                                <th class="phone-cell">手機號碼 <img src="/img/icons/down.svg" alt=""></th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -121,7 +121,7 @@
                                 <tr class="list-item">
                                     <td>${ member.memberId }</td>
                                     <td>${ member.account }</td>
-                                    <td class="ellipsis" data-bs-toggle="tooltip" data-bs-placement="top" title="example_password">${ member.password }</td>
+                                    <td class="ellipsis d-none" data-bs-toggle="tooltip" data-bs-placement="top" title="example_password">${ member.password }</td>
                                     <td>${ member.name }</td>
                                     <td>${ member.gender }</td>
                                     <td>
