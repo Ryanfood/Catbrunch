@@ -12,12 +12,14 @@ CREATE TABLE member (
     member_id INT AUTO_INCREMENT PRIMARY KEY,
     account VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    salt VARCHAR(255) NOT NULL DEFAULT '',
     name VARCHAR(50) NOT NULL,
     gender VARCHAR(10),
     birthday DATE,
     email VARCHAR(100) UNIQUE NOT NULL,
     phone VARCHAR(20),
-    is_member INT(10) CHECK (is_member IN (1, 2, 3)) DEFAULT 3
+    is_member INT(10) CHECK (is_member IN (1, 2)) DEFAULT 2
+    -- is_member 權限 (1：管理者, 2：一般會員)
 );
 
 -- 刪除已存在的 menu 表單
@@ -51,13 +53,7 @@ CREATE TABLE news (
 CREATE TABLE orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     table_number INT,
-    order_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    menu_id INT,
-    news_id INT,
-    member_id INT,
-    FOREIGN KEY (menu_id) REFERENCES menu(menu_id),
-    FOREIGN KEY (news_id) REFERENCES news(news_id),
-    FOREIGN KEY (member_id) REFERENCES member(member_id)
+    order_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -72,12 +68,16 @@ CREATE TABLE order_items (
     FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
 
-INSERT INTO member (account, password, name, gender, birthday, email, phone, is_member) VALUES
-('user1', 'password1', '王小明', '男生', '1990-01-01', 'xiaoming@example.com', '0912345678', 1),
-('user2', 'password2', '林小美', '女生', '1992-02-02', 'xiaomei@example.com', '0923456789', 1),
-('user3', 'password3', '陳大雄', '男生', '1994-03-03', 'daxiong@example.com', '0934567890', 2),
-('user4', 'password4', '張小花', '女生', '1996-04-04', 'xiaohua@example.com', '0945678901', 2),
-('user5', 'password5', '劉大海', '男生', '1998-05-05', 'dahai@example.com', '0956789012', 3);
+INSERT INTO member (account, password, salt, name, gender, birthday, email, phone, is_member) VALUES 
+('ryan', 'f7879e8c7a8fa626618dbcc6f461ea265cea5ab5fe501b7634344ae8d2e561a3', 'b92ef4655fe1feab6535d1a278902baa', 'Ryan', '男生', '2024-05-28', 'food5566@gmail.com', '0911111111', 1),
+('admin', '8593942338889ef646b2ac418b4c772235d7a0b7b54450e9b19c154ac8efcca2', 'dbe3ace863a8d464bcdbc9d1f15fc19f', 'admin', '女生', '2024-06-01', 'admin@gmail.com', '0900000000', 1),
+('user1', '9c23f5e6df23f05657f6612dea59c74b92b2b038002d3d2856497e32f84ea9f6', 'd0ec7a842109c36ede6c8e04cfbbbb24', '王小明', '女生', '1990-01-01', 'xiaoming@example.com', '0912345678', 2),
+('user2', 'dea503f7cc1f22ee900226a21d23643424ece7a05d392a1aba379c34e159a808', '353b039f856a87465c2e3c07bb2979b8', '林小美', '女生', '1992-02-02', 'xiaomei@example.com', '0923456789', 2),
+('user3', 'e5bf24c6f73311c8ad966686685494a169fdacf3e3d034396d8bb8307ca70d46', 'd9634680cfb402b555c5036b1a9aedf5', '陳大雄', '女生', '1964-03-03', 'daxiong@example.com', '0934567890', 2),
+('user4', 'db08ce00e2ac0ab5dd5a92a2a053e4c5bff3e147c2eb2bbbb1f06ec886392d07', '0db2cc51238f2d8be70cde9f66f7cc5d', '張小花', '男生', '1976-04-04', 'xiaohua@example.com', '0945678901', 2),
+('user5', '0fd92a83bd66c4ed2c7ff88c6aceabcfbee28bf1c7cb6a79754231b448ae8bdd', '9a422fcbce461d111e1f36a9a5f9ecb0', '劉大海', '男生', '1998-05-05', 'dahai@example.com', '0956789012', 2),
+('user6', '8377f460cabeeaa810cf67639e5b739887f43f511e448760458405705c217916', '3d295ea172511a4274b5b8d12ae3b33e', '唯安哥', '女生', '2024-06-11', 'weian18663@gmail.com', '0967890123', 2),
+('user7', '74292812b79f5592466498ca8ca0143231ff9ac06d342a2b409dd2535ba2cf52', '92e07562e1bb2d65c70f2de81aa0f79f', 'user7', '男生', '2024-06-07', 'user7@gmail.com', '0978901234', 2);
 
 
 INSERT INTO menu (meal_name, meal_type, description, meal_price, meal_image) VALUES
@@ -133,19 +133,9 @@ INSERT INTO news (news_title, content, news_image, start_date, end_date, combo_n
 ('媽媽我愛妳', '帶著媽媽一起來，貓貓Pizza只要100元！', 'mother.jpg', '2024-05-01', '2024-05-31', '母親節套餐', 100),
 ('爸爸辛苦了', '帶著爸爸來用餐，炸物拼盤特價88元', 'father.jpg', '2024-08-01', '2024-08-31', '父親節套餐', 88);
 
-INSERT INTO orders (table_number, menu_id, news_id, member_id) VALUES 
-(1, 1, 1, 1);
 
--- 獲取剛剛插入的 order_id
-SET @order_id = LAST_INSERT_ID();
-
-INSERT INTO order_items (order_id, order_name, quantity, price) VALUES 
-(@order_id, 'Pasta', 2, 50),
-(@order_id, 'Burger', 4, 50),
-(@order_id, 'Pizza', 3, 50);
-
-
-
-前端加入購物車：只在前端進行操作，將選擇的餐點存儲在 JavaScript 的購物車數據結構中。
-前端送出訂單：將購物車數據發送到後端。
-後端處理訂單：後端接收數據，先插入 orders 表單，然後插入 order_items 表單。
+-- 查詢orders
+-- SELECT orders.order_id, table_number, order_name, quantity, price, order_time 
+-- FROM orders
+-- JOIN order_items ON orders.order_id = order_items.order_id
+-- WHERE orders.order_id = 1;

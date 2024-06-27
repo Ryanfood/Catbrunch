@@ -42,24 +42,16 @@ public class OrderService {
     public List<OrderItem> getOrderItemById(Integer orderId) {
         return orderItemDao.findOrderItemById(orderId);
     }
-	
-	
-	
+
 	
 	// 取得單筆 order
 	public Order getOrderById(Integer orderId) {
 		return orderDao.findOrderById(orderId);
 	}
 	
-	/*
-	// 取得單筆 orderItem
-	public OrderItem getOrderItemById(Integer orderId) {
-		System.out.println("Order item fetched from database: " + orderId);
-		return orderItemDao.findOrderItemById(orderId);
-	}
-	*/
 	
 	// 新增 order
+	// @Transactional 失敗的話會 Roll Back
 	@Transactional
     public void createOrder(OrderDto orderDto) {
         // Insert order and get generated order_id
@@ -71,15 +63,6 @@ public class OrderService {
         }
     }
 	
-	
-	/* 原本的
-	// 新增 order
-	public int createOrder(Order order, OrderItem orderItem) {
-		orderDao.createOrder(order, orderItem);
-		orderItemDao.createOrderItem(orderItem);
-		return orderDao.createOrder(order, orderItem);
-	}
-	*/
 	
 	// 刪除 order
 	@Transactional

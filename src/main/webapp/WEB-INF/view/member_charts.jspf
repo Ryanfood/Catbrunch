@@ -8,8 +8,8 @@
 <%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form"%>
 
 <!-- 統計資料 -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
         google.charts.load('current', {'packages': ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -110,8 +110,8 @@
             Chart.draw(ageData, ageOptions);
         }
         
-        
-    </script>
+    
+</script>
 
 	<h2 class="mb-4">統計圖表</h2>
 	<div class="col-12 col-md-6">

@@ -11,7 +11,17 @@ $(document).ready(function() {
     }
     
     // 找到具有 hello 類別的 <a> 元素，並將歡迎回來 memberName 設定為其內容
-    $('.hello').text('歡迎回來 ' + memberName + ' 鏟屎官');
+    // 且寬度小於768時不顯示後面名稱
+    function updateText() {
+      if ($(window).width() < 768) {
+        $('.hello').text('歡迎回來 ' + memberName);
+      } else {
+        $('.hello').text('歡迎回來 ' + memberName + ' 鏟屎官');
+      }
+    }
+
+    $(window).resize(updateText);
+    updateText(); // 初始化呼叫
 
 	// 登出按鈕
 	$('.logout').on('click', function(event) {
