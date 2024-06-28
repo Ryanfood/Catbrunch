@@ -6,7 +6,7 @@ $(document).ready(function () {
       $(this).find('.col-md-6').eq(1).addClass('order-md-1');
     }
   });
-  
+
   // 每個頁面要顯示幾個項目
   var perPage = 3;
   // 總共有多少個項目

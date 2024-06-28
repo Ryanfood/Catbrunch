@@ -6,7 +6,7 @@ $(document).ready(function () {
   $('.list-group-item').click(function () {
     var category = $(this).data('category');
   });
-  
+
   // 監聽視窗大小改變事件，並重新初始化分頁
   $(window).resize(function () {
     getPerPage();
@@ -44,15 +44,15 @@ $(document).ready(function () {
       }
     });
   }
-  
+
   // 新增或修改菜單按鈕
-  $('#addMenuForm').on('submit', function(event) {
+  $('#addMenuForm').on('submit', function (event) {
     // 阻止表單的默認提交行為
-    event.preventDefault(); 
-    
+    event.preventDefault();
+
     // 獲取按鈕的 data-action 屬性的值
     var action = $('button[type="submit"]').data('action');
-    
+
     // 根據 data-action 的值顯示相應的 SweetAlert2 警告框
     if (action === 'update') {
       Swal.fire({
@@ -74,18 +74,18 @@ $(document).ready(function () {
     // 表單提交
     this.submit();
   });
-  
-  
 
-	// 刪除按鈕
-  $('.deleteButton').on('click', function(event) {
+
+
+  // 刪除按鈕
+  $('.deleteButton').on('click', function (event) {
     event.preventDefault(); // 阻止表單的默認提交行為
-    
+
     var form = $(this).closest('form'); // 獲取當前按鈕所在的表單
-    
+
     // closest 方法找最近具有 list-item 類的父元素，在該元素內部找具有 card-title 類的元素，然後取得文本內容並去除頭尾空白
     var mealName = $(this).closest('.list-item').find('.card-title').text().trim();
-	
+
     // 使用 SweetAlert2 顯示確認提示框
     Swal.fire({
       title: '確定要刪除嗎?',
@@ -98,20 +98,20 @@ $(document).ready(function () {
       cancelButtonText: '取消'
     }).then((result) => {
       if (result.isConfirmed) {
-		Swal.fire({
-	      title: `${mealName}刪除成功!`,
-	      icon: "success",
-	      iconColor: '#4CAF50',
-	      timer: 1300,
-  		  showConfirmButton: false
-	    });
+        Swal.fire({
+          title: `${mealName}刪除成功!`,
+          icon: "success",
+          iconColor: '#4CAF50',
+          timer: 1300,
+          showConfirmButton: false
+        });
         form.submit();
       }
     });
   });
 
-  
-  
+
+
 
 
 });

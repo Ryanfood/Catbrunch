@@ -21,7 +21,7 @@ $(document).ready(function () {
     };
 
     // 監聽選擇框的變化事件
-    $('.form-select').change(function() {
+    $('.form-select').change(function () {
         orderData.tableNumber = $(this).val();
         saveOrderData();
     });
@@ -143,21 +143,21 @@ $(document).ready(function () {
     // 點擊送出訂單按鈕時，使用 AJAX 將購物車資料發送到後端
     $('#submit-order').on('click', function (event) {
         event.preventDefault(); // 阻止表單的默認提交行為
-    
+
         // 獲取選擇的桌號
-	    var tableNumber = $('.form-select').val();
-	    if (!tableNumber) {
-	        Swal.fire({
-	            icon: "error",
-	            title: "請選擇桌號！",
-	            timer: 1500,
-	            showConfirmButton: false
-	        });
-	        return;
-	    }
-        
-        
-        
+        var tableNumber = $('.form-select').val();
+        if (!tableNumber) {
+            Swal.fire({
+                icon: "error",
+                title: "請選擇桌號！",
+                timer: 1500,
+                showConfirmButton: false
+            });
+            return;
+        }
+
+
+
         if (orderData.items.length === 0) {
             Swal.fire({
                 icon: "error",
@@ -167,26 +167,26 @@ $(document).ready(function () {
             });
             return;
         }
-        
+
         // 更新桌號
-    	orderData.tableNumber = tableNumber;
+        orderData.tableNumber = tableNumber;
 
         // 更新訂單時間
         orderData.orderTime = new Date().toISOString().replace('T', ' ').substring(0, 19); // 新增訂單時間，格式為 "yyyy-MM-dd HH:mm:ss"
-		
-		/*
-		// 獲取當前時間
-		var currentDate = new Date();
-		
-		// 格式化輸出
-		orderData.orderTime = currentDate.getFullYear() + '-' +
-		    ('0' + (currentDate.getMonth() + 1)).slice(-2) + '-' +
-		    ('0' + currentDate.getDate()).slice(-2) + ' ' +
-		    ('0' + currentDate.getHours()).slice(-2) + ':' +
-		    ('0' + currentDate.getMinutes()).slice(-2) + ':' +
-		    ('0' + currentDate.getSeconds()).slice(-2);
+
+        /*
+        // 獲取當前時間
+        var currentDate = new Date();
+    	
+        // 格式化輸出
+        orderData.orderTime = currentDate.getFullYear() + '-' +
+            ('0' + (currentDate.getMonth() + 1)).slice(-2) + '-' +
+            ('0' + currentDate.getDate()).slice(-2) + ' ' +
+            ('0' + currentDate.getHours()).slice(-2) + ':' +
+            ('0' + currentDate.getMinutes()).slice(-2) + ':' +
+            ('0' + currentDate.getSeconds()).slice(-2);
          */
-	
+
         // 使用 AJAX 發送資料到後端
         $.ajax({
             url: 'http://localhost:8080/order_backend/', // 替換為你的後端提交訂單的 URL
