@@ -301,64 +301,64 @@
 					            </div>
 					            <div class="modal-body">
 					                <form id="updateMemberForm" method="PUT" enctype="multipart/form-data">
-    <!-- HttpMethod 隱藏欄位 -->
-    <input type="hidden" class="form-control" id="memberId" name="memberId">
-    <input name="_method" type="hidden" value="PUT" />
-    <fieldset>
-        <!-- 電子郵件 -->
-        <label for="email" class="form-label">電子郵件</label>
-        <div class="input-group mb-3">
-            <div class="input-group-text icon"><i class="fa fa-envelope"></i></div>
-            <input type="email" class="form-control" id="updateEmail" name="updateEmail" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" readonly />
-        </div>
-        <div id="emailError" class="invalid-feedback" style="display: none;">此Email已被使用。</div>
-
-        <!-- 驗證碼 -->
-        <label for="verificationCode" class="form-label">輸入驗證碼</label>
-        <div class="input-group mb-2">
-            <div class="input-group-text icon"><i class="fa fa-key"></i></div>
-            <input type="text" class="form-control" id="verificationCode" name="verificationCode" placeholder="Verification Code" maxlength="6" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);" />
-        </div>
-
-        <!-- 新密碼 -->
-        <div id="passwordFields" style="display: none;">
-            <label for="updatePassword">輸入新密碼</label>
-            <div class="input-group mb-3">
-                <div class="input-group-text icon"><i class="fa fa-lock"></i></div>
-                <div class="password-eye">
-                    <input type="password" class="form-control newPassword" id="newPassword" name="newPassword" placeholder="New Password" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$" required>
-                    <div class="password-eye-append">
-                        <span class="passwordToggle" id="passwordToggle">
-                            <i class="fa fa-eye d-none"></i>
-                            <i class="fa fa-eye-slash"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 確認新密碼 -->
-            <label for="password2">確認新密碼</label>
-            <div class="input-group mb-3">
-                <div class="input-group-text icon"><i class="fa fa-lock"></i></div>
-                <div class="password-eye">
-                    <input type="password" class="form-control newPassword2" id="newPassword2" name="newPassword2" placeholder="Confirm New Password" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$" required>
-                    <div class="password-eye-append">
-                        <span class="passwordToggle" id="passwordToggle2">
-                            <i class="fa fa-eye d-none"></i>
-                            <i class="fa fa-eye-slash"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-button my-3 text-center">
-            <button type="button" class="btn btn-outline-secondary me-3" data-bs-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-outline-primary me-3" id="verifyCodeButton">驗證</button>
-            <button type="button" id="updateButton" class="btn btn-outline-primary ms-3" style="display: none;">修改密碼</button>
-        </div>
-    </fieldset>
-</form>
+									    <!-- HttpMethod 隱藏欄位 -->
+									    <input type="hidden" class="form-control" id="memberId" name="memberId">
+									    <input name="_method" type="hidden" value="PUT" />
+									    <fieldset>
+									        <!-- 電子郵件 -->
+									        <label for="email" class="form-label">電子郵件</label>
+									        <div class="input-group mb-3">
+									            <div class="input-group-text icon"><i class="fa fa-envelope"></i></div>
+									            <input type="email" class="form-control" id="updateEmail" name="updateEmail" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" readonly />
+									        </div>
+									        <div id="emailError" class="invalid-feedback" style="display: none;">此Email已被使用。</div>
+									
+									        <!-- 驗證碼 -->
+									        <label for="verificationCode" class="form-label">輸入驗證碼</label>
+									        <div class="input-group mb-2">
+									            <div class="input-group-text icon"><i class="fa fa-key"></i></div>
+									            <input type="text" class="form-control" id="verificationCode" name="verificationCode" placeholder="Verification Code" maxlength="6" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);" />
+									        </div>
+									
+									        <!-- 新密碼 -->
+									        <div id="passwordFields" style="display: none;">
+									            <label for="updatePassword">輸入新密碼</label>
+									            <div class="input-group mb-3">
+									                <div class="input-group-text icon"><i class="fa fa-lock"></i></div>
+									                <div class="password-eye">
+									                    <input type="password" class="form-control newPassword" id="newPassword" name="newPassword" placeholder="New Password" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$" required>
+									                    <div class="password-eye-append">
+									                        <span class="passwordToggle" id="passwordToggle">
+									                            <i class="fa fa-eye d-none"></i>
+									                            <i class="fa fa-eye-slash"></i>
+									                        </span>
+									                    </div>
+									                </div>
+									            </div>
+									
+									            <!-- 確認新密碼 -->
+									            <label for="password2">確認新密碼</label>
+									            <div class="input-group mb-3">
+									                <div class="input-group-text icon"><i class="fa fa-lock"></i></div>
+									                <div class="password-eye">
+									                    <input type="password" class="form-control newPassword2" id="newPassword2" name="newPassword2" placeholder="Confirm New Password" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$" required>
+									                    <div class="password-eye-append">
+									                        <span class="passwordToggle" id="passwordToggle2">
+									                            <i class="fa fa-eye d-none"></i>
+									                            <i class="fa fa-eye-slash"></i>
+									                        </span>
+									                    </div>
+									                </div>
+									            </div>
+									        </div>
+									
+									        <div class="modal-button my-3 text-center">
+									            <button type="button" class="btn btn-outline-secondary me-3" data-bs-dismiss="modal">取消</button>
+									            <button type="button" class="btn btn-outline-primary me-3" id="verifyCodeButton">驗證</button>
+									            <button type="button" id="updateButton" class="btn btn-outline-primary ms-3" style="display: none;">修改密碼</button>
+									        </div>
+									    </fieldset>
+									</form>
 					            </div>
 					        </div>
 					    </div>
