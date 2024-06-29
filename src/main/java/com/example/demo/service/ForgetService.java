@@ -83,7 +83,7 @@ public class ForgetService {
         member.setSalt(KeyUtil.bytesToHex(newSalt)); // 將新的鹽值轉換為 Hex 字串
     }
 
-    // 將密碼和鹽值進行雜湊 
+    // 將密碼和鹽值進行雜湊
     private String hashPassword(String password, byte[] salt) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
