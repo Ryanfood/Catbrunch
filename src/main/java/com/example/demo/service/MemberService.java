@@ -81,6 +81,7 @@ public class MemberService {
 		return memberDao.deleteMember(memberId);
 	}
 	
+	// 登入
 	public Member login(String account, String password) throws Exception {
 	    // 從資料庫中根據帳號查詢相應的會員
 	    Member member = memberDao.findMemberByAccount(account);

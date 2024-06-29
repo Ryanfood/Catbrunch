@@ -6,7 +6,7 @@ $(document).ready(function () {
   $('.list-group-item').click(function () {
     var category = $(this).data('category');
   });
-  
+
   // 監聽視窗大小改變事件，並重新初始化分頁
   $(window).resize(function () {
     getPerPage();
