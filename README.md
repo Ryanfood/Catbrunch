@@ -36,16 +36,16 @@
 
 ## 畫面及功能
 菜單顯示及訂購餐點<br>
-<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/56e48825-6577-4100-9717-154281dc0e6a" width="500" height="400">
-<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/e089d2ed-e9c8-4022-85a8-43391856febf" width="500" height="400">
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/56e48825-6577-4100-9717-154281dc0e6a" width="400" height="300">
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/e089d2ed-e9c8-4022-85a8-43391856febf" width="400" height="300">
 <br>
 忘記密碼及SHA-256密碼加密<br>
-<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/0af78210-7ab4-4abc-a763-a76b39818e91" width="500" height="400">
-<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/556deb80-d090-49ed-b341-06cde971ee4a" width="500" height="400">
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/0af78210-7ab4-4abc-a763-a76b39818e91" width="400" height="300">
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/556deb80-d090-49ed-b341-06cde971ee4a" width="400" height="300">
 <br>
 訂單內容及圖表分析<br>
-<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/f9af80b0-2b55-4ab6-b442-f5db513423a3" width="500" height="400">
-<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/320160a7-0189-4397-9b43-9b03c8536337" width="500" height="400">
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/f9af80b0-2b55-4ab6-b442-f5db513423a3" width="400" height="300">
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/320160a7-0189-4397-9b43-9b03c8536337" width="400" height="300">
 <br>
 
 
