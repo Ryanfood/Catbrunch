@@ -9,36 +9,53 @@
 此專題名稱是因為常和朋友到處嘗試一些美食，也加上本身蠻喜歡貓咪，又覺得貓咪慵懶的樣子看起來很療癒，所以想把這兩項興趣做結合，做成一個早午餐的網站。貓貓早午餐不僅是分享美食的地方，更是愛貓人士的交流平台。在這裡，你可以品嘗到美味的早午餐，也能看到可愛貓咪的趣味故事和照片。
 
 ## 系統架構
-![image](https://github.com/Ryanfood/Catbrunch/assets/163374121/fa1f4717-b1a3-4286-943d-45f83dc34b02)
+![image](https://github.com/Ryanfood/Catbrunch/assets/163374121/8bce8ff9-8103-4dfb-8f75-d93828313bd3)
 
 
 ## 技術細節
 此專案使用了以下技術：
-- **前端**：HTML, CSS, JavaScript, Bootstrap 5, JQuery
+- **前端**：HTML, CSS, JavaScript, Bootstrap 5, JQuery, Google Charts
 - **後端**：Java, Spring boot
 - **資料庫**：MySQL
-- **視圖**：Google Charts
+- **視圖**：JSP
 - **架構**：MVC (Model-View-Controller), 包括 Controller, Service, DAO
 - **安全性**：
-  - CAPTCHA 驗證碼防止機器人攻擊
-  - SHA-256 密碼加鹽防止彩虹表攻擊
+  - CAPTCHA 驗證碼防止機器人攻擊，加強網站安全
+  - SHA-256 密碼加鹽防止彩虹表攻擊，保戶用戶隱私
+
+## 資料庫結構
+![image](https://github.com/Ryanfood/Catbrunch/assets/163374121/1ddcbb28-0907-4a64-9082-fac226b1637a)
+
 
 ## 網站架構
-- **前臺**：用戶可以瀏覽和選擇餐點、查看最新活動資訊等
-- **後臺**：管理員可以新增、修改、刪除菜單和活動，查看訂單明細，使用 Google Charts 分析銷售數據
+- **前臺**：菜單顯示、活動訊息、訂餐功能、餐廳地點、會員功能(登入、加入、忘記密碼)
+- **後臺**：管理員可以新增、修改、刪除菜單和活動，查看訂單明細，使用 Google Charts 分析銷售數據及管理會員資訊
 
 ## RWD響應式設計
 網站設計為響應式，可在手機、平板和桌機上流暢使用。
 
-## 安裝
-請按照以下步驟安裝和配置此專案：
+## 畫面及功能
+菜單顯示及訂購餐點
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/56e48825-6577-4100-9717-154281dc0e6a" width="500" height="400">
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/e089d2ed-e9c8-4022-85a8-43391856febf" width="500" height="400">
+<br>
+忘記密碼及SHA-256密碼加密
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/0af78210-7ab4-4abc-a763-a76b39818e91" width="500" height="400">
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/556deb80-d090-49ed-b341-06cde971ee4a" width="500" height="400">
+<br>
+訂單內容及圖表分析
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/f9af80b0-2b55-4ab6-b442-f5db513423a3" width="500" height="400">
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/320160a7-0189-4397-9b43-9b03c8536337" width="500" height="400">
+<br>
+![image](https://github.com/Ryanfood/Catbrunch/assets/163374121/f9af80b0-2b55-4ab6-b442-f5db513423a3)
 
-```bash
-# 克隆此存儲庫
-git clone https://github.com/username/repo.git
 
-# 進入專案目錄
-cd repo
 
-# 安裝依賴
-npm install
+
+
+
+
+
+
+
+
