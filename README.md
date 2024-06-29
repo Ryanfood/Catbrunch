@@ -40,7 +40,7 @@
 <img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/56e48825-6577-4100-9717-154281dc0e6a" width="400" height="300">
 <img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/e089d2ed-e9c8-4022-85a8-43391856febf" width="400" height="300">
 <br>
-忘記密碼及SHA-256密碼加密<br>
+忘記密碼及SHA-256雜湊加鹽<br>
 <img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/0af78210-7ab4-4abc-a763-a76b39818e91" width="400" height="300">
 <img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/ea5b1982-3a94-4d06-bb07-719956f5ffe6" width="400" height="300">
 
