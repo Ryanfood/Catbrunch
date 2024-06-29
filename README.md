@@ -1,5 +1,4 @@
 # 貓貓早午餐 CatBrunch
-
 <img src="https://raw.githubusercontent.com/Ryanfood/Catbrunch/master/src/main/resources/static/img/Logo/Logo.gif" alt="CatBrunch Logo" width="100" height="100">
 
 ## 簡介
@@ -9,11 +8,9 @@
 此專題名稱是因為常和朋友到處嘗試一些美食，也加上本身蠻喜歡貓咪，又覺得貓咪慵懶的樣子看起來很療癒，所以想把這兩項興趣做結合，做成一個早午餐的網站。貓貓早午餐不僅是分享美食的地方，更是愛貓人士的交流平台。在這裡，你可以品嘗到美味的早午餐，也能看到可愛貓咪的趣味故事和照片。
 
 ## 系統架構
-![image](https://github.com/Ryanfood/Catbrunch/assets/163374121/8bce8ff9-8103-4dfb-8f75-d93828313bd3)
-
+![image](https://github.com/Ryanfood/Catbrunch/assets/163374121/61cc06e9-0f49-4fa3-844f-9a174d42b2f1)
 
 ## 技術細節
-此專案使用了以下技術：
 - **前端**：HTML, CSS, JavaScript, Bootstrap 5, JQuery, Google Charts
 - **後端**：Java, Spring boot
 - **資料庫**：MySQL
@@ -29,7 +26,11 @@
 
 ## 網站架構
 - **前臺**：菜單顯示、活動訊息、訂餐功能、餐廳地點、會員功能(登入、加入、忘記密碼)
+![image](https://github.com/Ryanfood/Catbrunch/assets/163374121/03bba25d-b1ea-427f-b54f-06b7bd84b5cd)
+
 - **後臺**：管理員可以新增、修改、刪除菜單和活動，查看訂單明細，使用 Google Charts 分析銷售數據及管理會員資訊
+![image](https://github.com/Ryanfood/Catbrunch/assets/163374121/9595049b-b48a-4960-b476-8be39b469004)
+
 
 ## RWD響應式設計
 網站設計為響應式，可在手機、平板和桌機上流暢使用。
