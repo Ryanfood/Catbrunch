@@ -131,7 +131,6 @@ public class MemberService {
 		    //throw new Exception("Account not found");
 		    return null;
 		}
-
 		// 從資料庫中獲取會員的密碼雜湊值和鹽值
 		String hash = member.getPassword();
 		String salt = member.getSalt();
