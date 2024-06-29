@@ -58,7 +58,7 @@ public class MemberService {
 			System.out.printf("加鹽後的哈希密碼: %s%n", hashedHexString);
 			
 			// 4.存入 DB
-			// 設定加密後的密碼及鹽巴
+			// 設定雜湊後的密碼及鹽巴
 			member.setPassword(hashedHexString);
 			member.setSalt(KeyUtil.bytesToHex(salt));
 		} else {
