@@ -42,7 +42,8 @@
 <br>
 忘記密碼及SHA-256密碼加密<br>
 <img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/0af78210-7ab4-4abc-a763-a76b39818e91" width="400" height="300">
-<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/556deb80-d090-49ed-b341-06cde971ee4a" width="400" height="300">
+<img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/ea5b1982-3a94-4d06-bb07-719956f5ffe6" width="400" height="300">
+
 <br>
 訂單內容及圖表分析<br>
 <img src="https://github.com/Ryanfood/Catbrunch/assets/163374121/f9af80b0-2b55-4ab6-b442-f5db513423a3" width="400" height="300">
