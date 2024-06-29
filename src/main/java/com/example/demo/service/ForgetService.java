@@ -76,7 +76,7 @@ public class ForgetService {
         return salt;
     }
 
-    // 更新密碼及鹽值
+    // 更新密碼及鹽值 
     private void updatePasswordAndSalt(Member member, String newPassword, byte[] newSalt) {
         String hashedPassword = hashPassword(newPassword, newSalt);
         member.setPassword(hashedPassword);
