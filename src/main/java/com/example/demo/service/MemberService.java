@@ -34,7 +34,7 @@ public class MemberService {
 	public int createMember(Member member) throws Exception {
 		
 		if(member != null) {
-			// 1.將 password 利用 SHA-256 雜湊加鹽
+			// 1.將 password 利用 SHA-256 雜湊加鹽 
 			String password = member.getPassword();
 			// 隨機生成一個鹽(Salt)
 			byte[] salt = new byte[16];
