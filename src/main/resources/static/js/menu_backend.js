@@ -44,6 +44,22 @@ $(document).ready(function () {
       }
     });
   }
+  
+  // 刷新表單內的圖片
+  $('#mealImage').change(function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        // 找到已有的 img 標籤，並更新其 src 屬性
+        $('#imagePreview img').attr('src', e.target.result);
+      };
+      reader.readAsDataURL(file);
+
+    }
+  });
+  
+
 
   // 新增或修改菜單按鈕
   $('#addMenuForm').on('submit', function (event) {

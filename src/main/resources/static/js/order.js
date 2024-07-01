@@ -252,7 +252,7 @@ $(document).ready(function () {
         }
 
         // 添加新的分頁控制元件
-        $("#pagination").pagination({
+        $("#pagination-container").pagination({
             items: numItems,
             itemsOnPage: perPage,
             cssStyle: "light-theme",
