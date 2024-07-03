@@ -26,8 +26,9 @@ public class OrderDaoImpl implements OrderDao {
 	// 查詢所有
 	@Override
 	public List<Order> findAllOrder() {
-	    String sql = "SELECT order_id, table_number, order_time, total_price"
-	    		   + " FROM orders ";
+		String sql = "SELECT order_id, table_number, order_time, total_price"
+		           + " FROM orders"
+		           + " ORDER BY order_id DESC";
 	    		
 	    		//+ "JOIN order_items ON orders.order_id = order_items.order_id"; 
 	    

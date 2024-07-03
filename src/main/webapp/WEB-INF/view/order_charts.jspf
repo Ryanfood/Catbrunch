@@ -131,7 +131,7 @@
 
         orders.forEach(order => {
             var hours = order.time.getHours();
-            if (hours >= 10 && hours < 16) {
+            if (hours >= 10 && hours <= 16) {
                 morningShift += order.price;
             } else if (hours >= 17 && hours <= 22) {
                 eveningShift += order.price;
